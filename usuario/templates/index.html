@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>LeList</title>
+    <STYLE>
+         body{
+            front-family: Arial, helvetica, sans-serif;
+            background-image: linear-gradient(90deg, rgba(1,68,245,1) 0%, rgba(0,204,255,1) 39%, rgba(0,212,255,1) 100%);
+        }
+        .back{
+            background-color: #0000;
+            position: absolute;
+            top: 50%;
+            left: 60%;
+            transform: translate(-50%, -50%);
+            padding: 80px;
+            border-radius: 35px;
+            color: #fff;
+        }
+        .L{
+        position: absolute;
+        width: 160px;
+        height: 226.67px;
+        left: 105px;
+        top: 73px;
+
+        font-family: 'Inter';
+        font-style: normal;
+        font-weight: 400;
+        font-size: 160px;
+        line-height: 194px;
+
+        color: #6BDCFF;
+        }
+        .elist{
+        position: absolute;
+        width: 161.41px;
+        height: 56px;
+        left: 300px;
+        top: 389px;
+
+        font-family: 'Inter';
+        font-style: normal;
+        font-weight: 400;
+        font-size: 39.5294px;
+        line-height: 48px;
+
+        color: #00000;
+        }
+         .login{
+            background-color: #feca64;
+            position: absolute;
+            border: none;
+            padding: 15px;
+            width: 30%;
+            border-radius: 20px;
+            color: #000000;
+            text-decoration: none;
+            text-align: center;
+
+            font-style: normal;
+            font-size: 16px;
+        }
+        .login:hover{
+            background-color: #c88500;
+            cursor: pointer;
+            color: #fff;
+        }
+        .cad{
+            background-color: #5684fe;
+            position: absolute;
+            border: none;
+            left: 120%;
+            padding: 25px;
+            width: 48%;
+            border-radius: 20px;
+            color: #000000;
+            text-decoration: none;
+            text-align: center;
+
+            font-style: normal;
+            font-size: 16px;
+        }
+        .cad:hover{
+            background-color: deepskyblue;
+            cursor: pointer;
+            color: white;
+        }
+
+
+    </STYLE>
+
+</head>
+<body>
+<form>
+        <l>
+            Olá,essa é a cara inicial do nosso sistema.
+        </l>
+    </form>
+    <div class="back">
+        <form>
+            <a class="login" href="{% url 'login'%}">Tela de Login </a>
+            <br>
+            <br>
+             <a class="cad" href="{% url 'cadastro'%}">Cadastro </a> </l>
+        </form>
+    </div>
+    <div class="L">
+        <h1>L</h1>
+    </div>
+    <div class="elist">
+        <h1>eList</h1>
+    </div>
+
+
+
+</body>
+</html>

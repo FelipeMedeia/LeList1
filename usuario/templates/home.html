@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>home</title>
+    <style>
+        body{
+            front-family: Arial, helvetica, sans-serif;
+            background-image: deepskyblue;
+        }
+        .back{
+            background-color: #caf4ff;
+            position: absolute;
+            top: 50%;
+            left: 60%;
+            transform: translate(-50%, -50%);
+            padding: 80px;
+            border-radius: 35px;
+            color: #000000;
+        }
+        .logout{
+            background-color: #5684fe;
+            position: absolute;
+            border: none;
+            padding: 15px;
+            left: 85%;
+            width: 10%;
+            border-radius: 20px;
+            color: #000000;
+            text-decoration: none;
+            text-align: center;
+
+            font-style: normal;
+            font-size: 16px;
+        }
+        .logout:hover{
+            background-color: deepskyblue;
+            cursor: pointer;
+            color: white;
+        }
+        body{
+            front-family: Arial, helvetica, sans-serif;
+            background-image: cyan;
+        }
+        .top{
+            background-color: turquoise;
+            font-style: normal;
+            font-size: 16px;
+            padding: 15px;
+            border: none;
+        }
+        #menu a{
+            color: #ffff;
+            font-style: normal;
+            font-size: 16px;
+            text-align: center;
+            text-decoration: none;
+            background-color: #000000;
+            padding: 12px;
+
+        }
+        #menu a:hover{
+            background-color: red;
+        }
+
+
+    </style>
+</head>
+    <body>
+        <div>
+            <nav class="top">
+                <p>LELIST</p>
+                <a class="logout" href="/logout/">Sair </a> </l>
+            </nav>
+        </div>
+        <div id="menu">
+             <ul>
+                <li>
+                   <a href="{% url 'produto'%}">Produtos </a> </l>
+                </li>
+             </ul>
+            <br>
+             <ul>
+                <li>
+                   <a href="{% url 'lista'%}">Lista </a> </l>
+                </li>
+             </ul>
+        </div>
+
+
+
+    </body>
+</html>

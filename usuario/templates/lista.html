@@ -1,0 +1,19 @@
+<l>Lista de produtos!!!</l>
+<a href="{% url 'home'%}">home </a> </l>
+
+
+<div class="container">
+    <div class="row">
+        {% for p in produto %}
+            <div class="col-sm-4">
+                <div class="polaroid">
+                    <img src="{{p.foto.url}}" style="width:20%">
+                    <div class="container">
+                        <p> {{p.nome}} {{p.quantidade}} </p>
+                        <p> {{p.data_validade}} </p>
+                    </div>
+                </div>
+            </div>
+        {% endfor %}
+    </div>
+</div>
