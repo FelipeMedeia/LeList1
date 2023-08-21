@@ -4,90 +4,105 @@
     <meta charset="UTF-8">
     <title>home</title>
     <style>
-        body{
-            front-family: Arial, helvetica, sans-serif;
-            background-image: deepskyblue;
+
+        body {
+            font-family: Arial, helvetica, sans-serif;
+            background-color:#caf4ff;
+            margin: 0;
+            padding: 0;
         }
-        .back{
+
+        h2{
+
+            width: 160px;
+            font-family: 'Inter';
+            font-style: normal;
+            font-weight: 400;
+            font-size: 50px;
+            color: #6BDCFF;
+        }
+
+        #menu {
+            background-color: #059FEC;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+        }
+
+        #menu ul {
+            list-style-type: none;
+            margin: 0;
+            padding: 0;
+            overflow: hidden;
+            display: flex;
+            justify-content: space-around;
+        }
+
+        #menu li {
+            position: relative;
+            width: 100%;
+        }
+
+        #menu li a {
+            display: block;
+            color: black;
+            font-style: normal;
+            font-size: 16px;
+            text-align: center;
+            text-decoration: none;
+            padding: 16px;
+            border: 1px solid black;
+        }
+
+        .logo {
+            color: #6BDCFF;
+        }
+
+        #menu li a:hover {
+            background-color: white;
+        }
+
+        .content {
             background-color: #caf4ff;
-            position: absolute;
-            top: 50%;
-            left: 60%;
-            transform: translate(-50%, -50%);
+            margin-top: 50px;
             padding: 80px;
-            border-radius: 35px;
             color: #000000;
         }
-        .logout{
-            background-color: #5684fe;
-            position: absolute;
-            border: none;
-            padding: 15px;
-            left: 85%;
-            width: 10%;
-            border-radius: 20px;
-            color: #000000;
-            text-decoration: none;
-            text-align: center;
-
-            font-style: normal;
-            font-size: 16px;
-        }
-        .logout:hover{
-            background-color: deepskyblue;
-            cursor: pointer;
-            color: white;
-        }
-        body{
-            front-family: Arial, helvetica, sans-serif;
-            background-image: cyan;
-        }
-        .top{
-            background-color: turquoise;
-            font-style: normal;
-            font-size: 16px;
-            padding: 15px;
-            border: none;
-        }
-        #menu a{
-            color: #ffff;
-            font-style: normal;
-            font-size: 16px;
-            text-align: center;
-            text-decoration: none;
-            background-color: #000000;
-            padding: 12px;
-
-        }
-        #menu a:hover{
-            background-color: red;
-        }
-
-
     </style>
 </head>
-    <body>
-        <div>
-            <nav class="top">
-                <p>LELIST</p>
-                <a class="logout" href="/logout/">Sair </a> </l>
-            </nav>
-        </div>
-        <div id="menu">
-             <ul>
-                <li>
-                   <a href="{% url 'produto'%}">Produtos </a> </l>
-                </li>
-             </ul>
-            <br>
-             <ul>
-                <li>
-                   <a href="{% url 'lista'%}">Lista </a> </l>
-                </li>
-             </ul>
-        </div>
+<body>
+    <div id="menu">
+        <ul>
+            <li>
+                <a href="{% url 'home'%}">LELIST</a>
+            </li>
+            <li>
+                <a href="{% url 'produto'%}">Produtos</a>
+            </li>
+            <li>
+                <a href="{% url 'lista'%}">Consulta</a>
+            </li>
+            <li>
+                <a href="{% url 'duvida' %}">Dúvida</a>
+            </li>
+            <li>
+                <a href="{% url 'logout' %}">Sair</a>
+            </li>
+        </ul>
+    </div>
 
-
-
-    </body>
+    <div class="content">
+        <h2>LeList</h2>
+        <p>
+            Dentro do contexto da realidade com o processo da modernidade. A crescente inserção de meios digitais na vida cotidiana fez com que a tecnologia se tornasse uma ferramenta importante na vida do ser humano. Pensando na problemática que o revendedor e os usuários passariam para o sistema de cadastramento será simples, intuitivo, rápido e prático, dados que normalmente seriam trabalhados em papel serão digitalizados, proporcionando assim um possível reuso de informação posteriormente.
+        </p>
+        <p>
+            Dessa forma, o sistema presente tem como foco ajudar seus usuários a ter um controle de forma organizada e precisa. O software possui como públicos-alvo tanto o vendedor, quanto seu cliente. Assim, será montado um catálogo com todos os produtos disponíveis até o presente momento. Uma ferramenta que terá todos os produtos do vendedor listados e organizados, seguindo suas características, marcas e dados relativos ao produto. Além disso, será possível cadastrar, excluir, consultar produtos já inseridos no sistema.
+        </p>
+        <p>
+            Para o revendedor, o sistema de cadastramento será simples, intuitivo, rápido e prático, dados que normalmente seriam trabalhados em papel serão digitalizados, proporcionando assim um possível reuso de informação posteriormente. Casos de alteração de preço sempre são recorrentes nesse ramo de trabalho, mas com uma função de edição, basta apenas adicionar o item uma vez, depois apenas atualizações, se necessário, resolverão qualquer pendência. LeList vai agilizar sua busca pelos produtos existentes em seu estoque, diminuir o tempo de espera do cliente e resolver seus relatórios.
+        </p>
+    </div>
+</body>
 </html>

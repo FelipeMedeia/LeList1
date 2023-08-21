@@ -1,5 +1,9 @@
+<!DOCTYPE html>
+<html lang="pt-br">
 <head>
-       <style>
+    <meta charset="UTF-8">
+    <title>Duvida</title>
+     <style>
            body {
                font-family: Arial, helvetica, sans-serif;
                background-color:#caf4ff;
@@ -39,6 +43,7 @@
                padding: 16px;
                border: 1px solid black;
            }
+
            #menu li a:hover {
                background-color: white;
            }
@@ -70,21 +75,10 @@
                padding: 16px;
                border: 1px solid black;
            }
-           .container{
-                text-decoration:none;
-                display: block;
-                position: center;
-                font-family: arial;
-                font-style: normal;
-                color: #0000000;
-                font-weight: 500;
-                font-size: 23px;
-                margin-left:80px;
-           }
        </style>
 </head>
-   <body>
-       <div id="menu">
+<body>
+    <div id="menu">
            <ul>
                <li>
                    <a href="{% url 'home'%}">Home</a>
@@ -93,18 +87,14 @@
            </ul>
        </div>
        <div>
-           <h2 class="titulo"> Lista de Produtos</h2>
+           <h2 class="titulo"> Como Utilizar o site</h2>
        </div>
-       <div class="gallery-container">
-            {% for p in produto %}
-                <div class="col-sm-4">
-                    <a class="gallery-items" href="../detalhes/{{p.id}}">
-                        <img src="{{p.foto.url}}">
-                        <div class="container">
-                            <p> {{p.nome}}</p>
-                        </div>
-                    </a>
-                </div>
-            {% endfor %}
-       </div>
-   </body>
+
+
+        <div>
+            <h2></h2>
+        </div>
+
+
+</body>
+</html>

@@ -1,17 +1,13 @@
 <!DOCTYPE html>
 <head>
     <style>
-        body{
-            front-family: Arial, helvetica, sans-serif;
-            background-image: cyan;
-        }
         .top{
-            background-color: #caf40f;
+            background-color: #caf4ff ;
             padding: 40px;
-            border-limit: none;
+            border: none;
         }
         .meio{
-            background-color: #caf4ff;
+            background-color: #6BDCFF;
             position: absolute;
             top: 50%;
             left: 50%;
@@ -21,35 +17,107 @@
             color: #000000;
         }
 
+        body {
+            font-family: Arial, helvetica, sans-serif;
+            background-color:#caf4ff;
+            margin: 0;
+            padding: 0;
+        }
+
+        #menu {
+            background-color: #059FEC;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+        }
+
+        #menu ul {
+            list-style-type: none;
+            margin: 0;
+            padding: 0;
+            overflow: hidden;
+            display: flex;
+            justify-content: left;
+        }
+
+        #menu li {
+            position: relative;
+            width: 100%;
+        }
+
+
+        #menu li a {
+            display: block;
+            color: black;
+            font-style: normal;
+            font-size: 16px;
+            text-align: center;
+            text-decoration: none;
+            padding: 16px;
+            border: 1px solid black;
+        }
+
+        .logo {
+            color: #6BDCFF;
+        }
+
+        #menu li a:hover {
+            background-color: white;
+        }
+        #add{
+            background-color: #8CFFF7;
+            border: none;
+            padding: 15px;
+            border-radius: 20px;
+            color: dark;
+            font-size: 15px;
+
+        }
+
+
     </style>
 
 </head>
 <body>
-    <nav class="top">
-        <div>
-            <a class="volta" href="{% url 'home' %}">Voltar para HOME </a>
-        </div>
-    </nav>
+    <div id="menu">
+        <ul>
+            <li>
+                <a href="{% url 'home'%}">LELIST</a>
+            </li>
+            <li>
+                <a href="{% url 'lista'%}">Consulta</a>
+            </li>
+        </ul>
+    </div>
     <div class="meio">
-        <form method="POST" action="{% url 'produto' %}"> {% csrf_token %}
-        <input type="text" placeholder="nome do produto" name="nome" required>
-         <br>
-         <br>
-        <input type="text" placeholder="categoria" name="tipo" required>
-         <br>
-         <br>
-         <input type="number" placeholder="quantidade" name="quantidade" required>
-         <br>
-         <br>
-         <input type="date" placeholder="data de validade" name="data_validade" required>
-         <br>
-         <br>
-         <input type="file" placeholder="imagem do produto" name="foto" required>
-         <br>
-         <br>
-
-         <button class="add">Adicionar</button>
-      </form>
+        <form action="{% url 'produto' %}" method="POST" enctype="multipart/form-data"> {% csrf_token %}
+            <input type="number" class="form-control" name="produto-id" value="{{produto.id}}" hidden>
+            <br>
+            <input type="text" placeholder="nome do produto" name="nome" value="{{produto.nome}}" required>
+             <br>
+             <br>
+            <input type="text" placeholder="categoria" name="tipo" value="{{produto.tipo}}" required>
+             <br>
+             <br>
+             <input type="number" placeholder="quantidade" name="quantidade" value="{{produto.quantidade}}" required>
+             <br>
+             <br>
+             <input type="date" placeholder="data de validade" name="data_validade" value="{{produto.data_validade}}" required>
+             <br>
+             <br>
+             <input type="file" placeholder="imagem do produto" name="file" value="{{produto.file}}" required>
+             <br>
+             <br>
+             {% if produto %}
+                <a href="/media/{{produto.foto}}" target="_blank"> Foto atual</a>
+                <br>
+                <br>
+                <input type="submit" class="add" value="Alterar">
+             {% else %}
+                <input type="submit" class="add" value="Adicionar">
+             {% endif %}
+        </form>
     </div>
 
 

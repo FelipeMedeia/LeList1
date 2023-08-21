@@ -1,8 +1,8 @@
+from django.http import request
 from django.urls import path
 from . import views
 from django.contrib.auth import views as auth_views
-from django.contrib.staticfiles.urls import static, staticfiles_urlpatterns
-from Lelist import settings
+
 
 urlpatterns = [
     path('', views.index, name='index'),
@@ -11,8 +11,9 @@ urlpatterns = [
     path('home/', views.home, name='home'),
     path('logout/', auth_views.LogoutView.as_view(), name='logout'),
     path('produto/', views.produto, name='produto'),
-    path('lista/', views.listar_produtos, name='lista')
+    path('lista/', views.listar_produtos, name='lista'),
+    path('detalhes/<id>/', views.produto_detalhe),
+    path('detalhes/excluir/<id>/', views.excluir_produto, name='excluir'),
+    path('home/duvidas/', views.duvidas, name='duvida')
 ]
 
-urlpatterns += staticfiles_urlpatterns()
-urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
