@@ -22,12 +22,13 @@ def cadastro(request):
         user = User.objects.filter(username=nome).first()
 
         if user:
-            return HttpResponse('Já existe um usuário com esse nome')
+            messages.error(request, 'Já existe um usuário com esse nome')
+            return redirect('cadastro')
 
         user = User.objects.create_user(username=nome, first_name=nome, email=email, password=senha)
         user.save()
 
-        return HttpResponse('Usuário cadastrado com sucesso')
+        return redirect('login')
 
 
 @login_required

@@ -99,6 +99,13 @@
 
         color: white;
         }
+        .alert{
+            position: absolute;
+            color: red;
+            top: 80%;
+            left: 49%;
+        }
+
 
 
 
@@ -130,6 +137,10 @@
             <a class="volta" href="{% url 'index'%}">voltar </a>
         </form>
     </div>
-
+    {% for message in messages%}
+            <div class="alert">
+                <strong>Error!</strong>{{message}}
+            </div>
+    {% endfor%}
 </body>
 </html>
