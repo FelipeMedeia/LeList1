@@ -105,9 +105,31 @@
             top: 80%;
             left: 49%;
         }
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.7);
+            align-items: center;
+            justify-content: center;
+        }
 
-
-
+        .modal-content {
+            background-color: #2D0651;
+            color: #fff;
+            width: 200px; /* Largura */
+            height: 100px; /* Altura */
+            padding: 20px;
+            border-radius: 10px;
+            text-align: center;
+            position: absolute;
+            top: 50%; /* Centraliza verticalmente */
+            left: 50%; /* Centraliza horizontalmente */
+            transform: translate(-50%, -50%);
+        }
 
     </style>
 </head>
@@ -131,7 +153,7 @@
          <br>
          <br>
          <button class="confirma">Cadastrar</button>
-         <button class="limpa", type="reset">Limpar</button>
+         <button class="limpa" type="reset">Limpar</button>
             <br>
             <br>
             <a class="volta" href="{% url 'index'%}">voltar </a>
@@ -142,5 +164,48 @@
                 <strong>Error!</strong>{{message}}
             </div>
     {% endfor%}
+    <div id="myModal" class="modal">
+        <div class="modal-content">
+            <p id="successMessage">Cadastro realizado com sucesso</p>
+            <button id="closeModal">OK</button>
+        </div>
+    </div>
+
+    <script>
+        // Função para mostrar a janela modal quando a variável cadastro_sucesso for True
+        function showModal() {
+            var cadastroSucesso = "{{ cadastro_sucesso }}"; // Certifique-se de que a variável cadastro_sucesso seja passada para o contexto do template
+
+            if (cadastroSucesso === "True") {
+                var modal = document.getElementById("myModal");
+                modal.style.display = "block";
+            }
+        }
+
+        // Função para fechar a janela modal e redirecionar para a página de login
+        function closeModal() {
+            var modal = document.getElementById("myModal");
+            modal.style.display = "none";
+            redirectToLogin();
+        }
+
+        // Função para redirecionar para a página de login
+        function redirectToLogin() {
+            window.location.href = "{% url 'login' %}"; // Substitua pelo URL correto
+        }
+
+        // Mostra a janela modal ao carregar a página
+        window.onload = function () {
+            showModal();
+        };
+
+        // Fecha a janela modal ao clicar no botão "OK"
+        var closeModalButton = document.getElementById("closeModal");
+        if (closeModalButton) {
+            closeModalButton.addEventListener("click", function () {
+                closeModal();
+            });
+        }
+    </script>
 </body>
 </html>
