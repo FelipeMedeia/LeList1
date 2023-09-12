@@ -69,6 +69,32 @@
             padding: 80px;
             color: #000000;
         }
+        .gallery-container{
+                display: flex;
+                flex-wrap: wrap;
+                justify-content: space-evenly;
+                gap: 10vw;
+                padding: 0 5vw;
+                margin-block-end: 150px;
+
+           }
+           .gallery-items{
+                width: 340px;
+                height: 340px;
+
+           }
+           .gallery-items img{
+                margin-top: 20px;
+                width: 200px;
+                height: 300px;
+                margin: 3px;
+                border: 3px solid white;
+           }
+           .container{
+                text-decoration: none;
+                text-align: center;
+           }
+
     </style>
 </head>
 <body>
@@ -81,7 +107,7 @@
                 <a href="{% url 'produto'%}">Produtos</a>
             </li>
             <li>
-                <a href="{% url 'lista'%}">Consulta</a>
+                <a href="{% url 'lista'%}">Relatório</a>
             </li>
             <li>
                 <a href="{% url 'duvida' %}">Dúvida</a>
@@ -91,18 +117,20 @@
             </li>
         </ul>
     </div>
-
     <div class="content">
-        <h2>LeList</h2>
-        <p>
-            Dentro do contexto da realidade com o processo da modernidade. A crescente inserção de meios digitais na vida cotidiana fez com que a tecnologia se tornasse uma ferramenta importante na vida do ser humano. Pensando na problemática que o revendedor e os usuários passariam para o sistema de cadastramento será simples, intuitivo, rápido e prático, dados que normalmente seriam trabalhados em papel serão digitalizados, proporcionando assim um possível reuso de informação posteriormente.
-        </p>
-        <p>
-            Dessa forma, o sistema presente tem como foco ajudar seus usuários a ter um controle de forma organizada e precisa. O software possui como públicos-alvo tanto o vendedor, quanto seu cliente. Assim, será montado um catálogo com todos os produtos disponíveis até o presente momento. Uma ferramenta que terá todos os produtos do vendedor listados e organizados, seguindo suas características, marcas e dados relativos ao produto. Além disso, será possível cadastrar, excluir, consultar produtos já inseridos no sistema.
-        </p>
-        <p>
-            Para o revendedor, o sistema de cadastramento será simples, intuitivo, rápido e prático, dados que normalmente seriam trabalhados em papel serão digitalizados, proporcionando assim um possível reuso de informação posteriormente. Casos de alteração de preço sempre são recorrentes nesse ramo de trabalho, mas com uma função de edição, basta apenas adicionar o item uma vez, depois apenas atualizações, se necessário, resolverão qualquer pendência. LeList vai agilizar sua busca pelos produtos existentes em seu estoque, diminuir o tempo de espera do cliente e resolver seus relatórios.
-        </p>
+        <div class="gallery-container">
+            {% for p in produto %}
+                <div class="col-sm-4">
+                    <a class="gallery-items" href="../detalhes/{{p.id}}">
+                        <img src="{{p.foto.url}}">
+                        <div class="container">
+                            <p> {{p.nome}}</p>
+                        </div>
+                    </a>
+                </div>
+            {% endfor %}
+        </div>
+
     </div>
 </body>
 </html>

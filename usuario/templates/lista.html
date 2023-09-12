@@ -89,22 +89,11 @@
                <li>
                    <a href="{% url 'home'%}">Home</a>
                </li>
-
            </ul>
        </div>
        <div>
-           <h2 class="titulo"> Lista de Produtos</h2>
+           <h2 class="titulo"> Relatório</h2>
        </div>
-       <div class="gallery-container">
-            {% for p in produto %}
-                <div class="col-sm-4">
-                    <a class="gallery-items" href="../detalhes/{{p.id}}">
-                        <img src="{{p.foto.url}}">
-                        <div class="container">
-                            <p> {{p.nome}}</p>
-                        </div>
-                    </a>
-                </div>
-            {% endfor %}
+
        </div>
    </body>

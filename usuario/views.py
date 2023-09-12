@@ -28,7 +28,8 @@ def cadastro(request):
         user = User.objects.create_user(username=nome, first_name=nome, email=email, password=senha)
         user.save()
 
-        return redirect('login')
+        context = {'cadastro_sucesso': True}
+        return render(request, 'cadastro.html', context)
 
 
 @login_required
@@ -51,7 +52,7 @@ def login(request):
         user = authenticate(username=nome, password=senha)
         if user:
             login_imp(request, user)
-            return render(request, 'home.html')
+            return redirect('home')
         else:
             messages.error(request, 'Usuário ou senha inválido! '
                                     'Por favor, tente novamente.')
@@ -60,7 +61,8 @@ def login(request):
 
 @login_required(login_url='../login/')
 def home(request):
-    return render(request, 'home.html')
+    produto = Produtos.objects.filter(user=request.user, active=True)
+    return render(request, 'home.html', {'produto': produto})
 
 
 @login_required(login_url='../login/')
