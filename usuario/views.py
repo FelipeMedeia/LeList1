@@ -12,9 +12,8 @@ from django.contrib.auth.decorators import login_required
 
 
 def cadastro(request):
-    if request.method == "GET":
-        return render(request, 'cadastro.html')
-    else:
+    if request.method == "POST":
+        # Lógica de validação e criação do usuário
         nome = request.POST.get('nome')
         email = request.POST.get('email')
         senha = request.POST.get('senha')
@@ -27,10 +26,12 @@ def cadastro(request):
 
         user = User.objects.create_user(username=nome, first_name=nome, email=email, password=senha)
         user.save()
-
-        return redirect('login')
-
-
+            
+    
+        context = {'cadastro_sucesso': True}
+        return render(request, 'cadastro.html', context)
+    
+    return render(request, 'cadastro.html')
 @login_required
 def logout(request):
     return redirect(request, '/')
