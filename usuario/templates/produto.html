@@ -95,13 +95,19 @@
             <input type="text" placeholder="nome do produto" name="nome" value="{{produto.nome}}" required>
              <br>
              <br>
-            <input type="text" placeholder="categoria" name="tipo" value="{{produto.tipo}}" required>
+            <select name="tipo" id="produto" required>
+                 <option value="" >Selecione uma categoria</option>
+                 <option value="{{produto.tipo}}" >Cosmetico</option>
+                 <option value="{{produto.tipo}}" >Perfume</option>
+                 <option value="{{produto.tipo}}" >Higiene</option>
+            </select>
+
              <br>
              <br>
              <input type="number" placeholder="quantidade" name="quantidade" value="{{produto.quantidade}}" required>
              <br>
              <br>
-             <input type="date" placeholder="data de validade" name="data_validade" value="{{produto.data_validade}}" required>
+             <input type="date" name="data_validade" value="{{produto.data_validade}}" required>
              <br>
              <br>
              <input type="file" placeholder="imagem do produto" name="file" value="{{produto.file}}" required>
