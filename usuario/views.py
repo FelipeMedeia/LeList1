@@ -7,6 +7,7 @@ from django.contrib.auth import login as login_imp, logout
 from .models import Produtos
 from django.contrib.auth.decorators import login_required
 from usuario.filters import ProdutoFilter
+from reportlab.pdfgen import canvas
 
 
 # Create your views here.
@@ -143,3 +144,45 @@ def excluir_produto(request, id):
 
 def index(request):
     return render(request, 'index.html')
+
+@login_required(login_url='../login/')
+def lista_de_produtos(request):
+    queryset = Produtos.objects.all()
+    produto_filter = ProdutoFilter(request.GET, queryset=queryset)
+    
+    context = {
+        'filtro': produto_filter,
+        'produtos': produto_filter.qs,
+    }
+    
+    return render(request, 'relatorio.html', context)
+
+def gerar_pdf(request):
+    queryset = Produtos.objects.all()
+    produto_filter = ProdutoFilter(request.GET, queryset=queryset)
+
+    response = HttpResponse(content_type='application/pdf')
+    response['Content-Disposition'] = 'attachment; filename="lista_de_produtos.pdf"'
+
+    p = canvas.Canvas(response)
+
+    # Configure a posição inicial para escrever os dados no PDF
+    y = 750
+
+    p.setFont("Helvetica-Bold", 16)
+    p.drawString(100, y, "Lista de Produtos")
+    p.setFont("Helvetica", 12)
+    y -= 30  # Ajuste a posição vertical para a próxima entrada de dados
+
+    for produto in produto_filter.qs:
+        p.drawString(100, y, f'Nome: {produto.nome}')
+        p.drawString(100, y - 15, f'Categoria: {produto.tipo}')
+        # p.drawImage(100,y - 30, f'foto:{produto.foto}') 
+        # Adicione mais campos do produto conforme necessário
+
+        y -= 30  # Ajuste a posição vertical para a próxima entrada de dados
+
+    p.showPage()
+    p.save()
+
+    return response

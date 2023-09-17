@@ -12,7 +12,8 @@ urlpatterns = [
     path('home/filter', views.home, name='filter'),
     path('logout/', auth_views.LogoutView.as_view(), name='logout'),
     path('produto/', views.produto, name='produto'),
-    path('lista/', views.listar_produtos, name='lista'),
+    path('relatorio/', views.lista_de_produtos, name='relatorio'),
+    path('gerar_pdf/', views.gerar_pdf, name='gerar_pdf'),
     path('detalhes/<id>/', views.produto_detalhe),
     path('detalhes/excluir/<id>/', views.excluir_produto, name='excluir'),
     path('home/duvidas/', views.duvidas, name='duvida')
