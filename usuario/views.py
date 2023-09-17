@@ -6,6 +6,7 @@ from django.contrib.auth import authenticate
 from django.contrib.auth import login as login_imp, logout
 from .models import Produtos
 from django.contrib.auth.decorators import login_required
+from usuario.filters import ProdutoFilter
 
 
 # Create your views here.
@@ -61,8 +62,29 @@ def login(request):
 
 @login_required(login_url='../login/')
 def home(request):
+    categoria_filter = ProdutoFilter(request.GET, queryset=Produtos.objects.all())
+    context = {
+        'form': categoria_filter.form,
+        'produto': categoria_filter.qs
+    }
+    return render(request, 'home.html', context)
+
+
+@login_required(login_url='../login/')
+def home_filter(request):
+    categoria_filter = ProdutoFilter(request.GET, queryset=Produtos.objects.all())
+
+    context = {
+        'form': categoria_filter.form,
+        'produto': categoria_filter.qs
+    }
+    return render(request, 'lista.html', context)
+
+
+@login_required(login_url='../login/')
+def listar_produtos(request):
     produto = Produtos.objects.filter(user=request.user, active=True)
-    return render(request, 'home.html', {'produto': produto})
+    return render(request, 'lista.html', {'produto': produto})
 
 
 @login_required(login_url='../login/')
@@ -104,10 +126,6 @@ def produto(request):
         return render(request, 'produto.html')
 
 
-@login_required(login_url='../login/')
-def listar_produtos(request):
-    produto = Produtos.objects.filter(user=request.user, active=True)
-    return render(request, 'lista.html', {'produto': produto})
 
 
 @login_required(login_url='../login/')
