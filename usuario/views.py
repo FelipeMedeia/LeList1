@@ -126,10 +126,6 @@ def produto(request):
         return render(request, 'produto.html')
 
 
-@login_required(login_url='../login/')
-def listar_produtos(request):
-    produto = Produtos.objects.filter(user=request.user, active=True)
-    return render(request, 'lista.html', {'produto': produto})
 
 
 @login_required(login_url='../login/')

@@ -68,7 +68,7 @@
             margin-top: 20px;
             padding: 80px;
             color: #000000;
-            text-align: right;
+            text-align: left;
         }
         .gallery-container{
                 display: flex;
@@ -130,7 +130,8 @@
                     <a class="gallery-items" href="../detalhes/{{p.id}}">
                         <img src="{{p.foto.url}}">
                         <div class="container">
-                            <p> {{p.nome}}</p>
+                            <p> Nome: {{p.nome}}</p>
+                            <p>Categoria:{{p.tipo}}</p>
                         </div>
                     </a>
                 </div>
