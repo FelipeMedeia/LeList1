@@ -9,6 +9,7 @@ urlpatterns = [
     path('cadastro/', views.cadastro, name='cadastro'),
     path('login/', views.login, name='login'),
     path('home/', views.home, name='home'),
+    path('home/filter', views.home, name='filter'),
     path('logout/', auth_views.LogoutView.as_view(), name='logout'),
     path('produto/', views.produto, name='produto'),
     path('lista/', views.listar_produtos, name='lista'),

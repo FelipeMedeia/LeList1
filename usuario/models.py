@@ -6,7 +6,7 @@ from django.contrib.auth.models import User
 class Produtos(models.Model):
     nome = models.CharField(max_length=100)
     tipo = models.CharField(max_length=100)
-    quantidade = models.IntegerField()
+    quantidade = models.PositiveIntegerField()
     data_validade = models.DateField()
     foto = models.ImageField(upload_to='produto')
     active = models.BooleanField(default=True)
