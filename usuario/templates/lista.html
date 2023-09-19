@@ -94,6 +94,15 @@
        <div>
            <h2 class="titulo"> Relatório</h2>
        </div>
+       <form method="get" action="{% url 'relatorio' %}">
+            <a href="{% url 'relatorio' %}" target="_blank" class="btn btn-primary">Gerar PDF</a>
+       </form>
+       <ul>
+           {% for produto in produtos %}
+                <li>{{ produto.nome }} - Categoria: {{ produto.tipo }} - <img src="{{produto.foto}}"></li>
+           {% endfor %}
+       </ul>
+
 
 
        </div>

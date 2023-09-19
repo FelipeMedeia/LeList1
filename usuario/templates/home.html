@@ -108,7 +108,7 @@
                 <a href="{% url 'produto'%}">Produtos</a>
             </li>
             <li>
-                <a href="{% url 'filter'%}">Relatório</a>
+                <a href="{% url 'relatorio'%}">Gerar PDF</a>
             </li>
             <li>
                 <a href="{% url 'duvida' %}">Dúvida</a>
@@ -119,7 +119,7 @@
         </ul>
     </div>
     <div class="content">
-        <form method="GET" action="{%url 'filter'%}">
+        <form method="GET" action="{%url 'home'%}">
             {{ form.as_p }}
             <button type="submit">Filtrar</button>
         </form>
