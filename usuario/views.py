@@ -7,6 +7,7 @@ from django.contrib.auth import login as login_imp, logout
 from .models import Produtos
 from django.contrib.auth.decorators import login_required
 from usuario.filters import ProdutoFilter
+from reportlab.pdfgen import canvas
 
 
 # Create your views here.
@@ -62,7 +63,8 @@ def login(request):
 
 @login_required(login_url='../login/')
 def home(request):
-    categoria_filter = ProdutoFilter(request.GET, queryset=Produtos.objects.all())
+    categoria_filter = ProdutoFilter(request.GET, queryset=Produtos.objects.filter(user=request.user, active=True))
+
     context = {
         'form': categoria_filter.form,
         'produto': categoria_filter.qs
@@ -72,13 +74,13 @@ def home(request):
 
 @login_required(login_url='../login/')
 def home_filter(request):
-    categoria_filter = ProdutoFilter(request.GET, queryset=Produtos.objects.all())
+    categoria_filter = ProdutoFilter(request.GET, queryset=Produtos.objects.filter(user=request.user, active=True))
 
     context = {
         'form': categoria_filter.form,
         'produto': categoria_filter.qs
     }
-    return render(request, 'lista.html', context)
+    return render(request, 'filter.html', context)
 
 
 @login_required(login_url='../login/')
@@ -143,3 +145,36 @@ def excluir_produto(request, id):
 
 def index(request):
     return render(request, 'index.html')
+
+
+@login_required(login_url='../login/')
+def gerar_pdf(request):
+    queryset = Produtos.objects.filter(user=request.user, active=True)
+    produto_filter = ProdutoFilter(request.GET, queryset=queryset)
+
+    response = HttpResponse(content_type='application/pdf')
+    response['Content-Disposition'] = 'attachment; filename="lista_de_produtos.pdf"'
+
+    p = canvas.Canvas(response)
+
+    # Configure a posição inicial para escrever os dados no PDF
+    y = 750
+
+    p.setFont("Helvetica-Bold", 16)
+    p.drawString(100, y, "Lista de Produtos")
+    p.setFont("Helvetica", 12)
+    y -= 30  # Ajuste a posição vertical para a próxima entrada de dados
+
+    for produto in produto_filter.qs:
+        p.drawString(100, y, f'Nome: {produto.nome}')
+        p.drawString(100, y - 15, f'Categoria: {produto.tipo}')
+        p.drawString(100, y - 30, f'foto:{produto.foto}')
+        #p.drawImage({produto.foto}, x=100, y=-30)
+        # Adicione mais campos do produto conforme necessário
+
+        y -= 50  # Ajuste a posição vertical para a próxima entrada de dados
+
+    p.showPage()
+    p.save()
+
+    return response
