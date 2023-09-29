@@ -10,6 +10,7 @@
         }
         .back{
             background-color: white;
+            flex-shrink: 0;
             position: absolute;
             top: 50%;
             left: 60%;
@@ -25,38 +26,42 @@
             font-size: 15px;
         }
         .login{
-            background-color: #0144f5;
+            background-color: #2D0651;
             border: none;
+            width: 150px;
             padding: 15px;
-            width: 100%;
+            position: relative;
+            top:15px;
+            left: 50px;
             border-radius: 20px;
             color: #fff;
             font-size: 15px;
         }
         .login:hover{
-            background-color: deepskyblue;
+            background-color: #900090;
             cursor: pointer;
             color: white;
+            box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
         }
-        .cad{
-            background-color: #5684fe;
-            font-family: 'Inter';
-            position: absolute;
+        .volta{
+            background-color: #708090;
+            position: relative;
+            top: 40px;
+            right: 60px;
             border: none;
             padding: 15px;
-            width: 48%;
             border-radius: 20px;
             color: #000000;
             text-decoration: none;
             text-align: center;
 
-            font-style: normal;
             font-size: 16px;
         }
-        .cad:hover{
-            background-color: deepskyblue;
+        .volta:hover{
+            background-color: #708090;
             cursor: pointer;
             color: white;
+            box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
         }
         .L{
         position: absolute;
@@ -65,28 +70,8 @@
         left: 105px;
         top: 73px;
 
-        font-family: 'Inter';
-        font-style: normal;
-        font-weight: 400;
-        font-size: 160px;
-        line-height: 194px;
-
-        color: #6BDCFF;
         }
-        .elist{
-        position: absolute;
-        width: 161.41px;
-        height: 56px;
-        left: 300px;
-        top: 389px;
 
-        font-family: 'Inter';
-        font-style: normal;
-        font-weight: 400;
-        font-size: 39.5294px;
-        line-height: 48px;
-        color: #fff;
-        }
         .alert{
             position: absolute;
             color: red;
@@ -95,6 +80,24 @@
         }
         h1{
             color: #2D0651;
+        }
+        .barra{
+        width: 250px;
+        height: 35px;
+        flex-shrink: 0;
+        border-radius: 25px;
+
+        border-radius: 25px;
+        border: 1px solid purple;
+        background: #D9D9D9;
+        box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
+        background: #fff;
+        position: relative;
+        top:15px;
+        justify-content: center;
+        padding: 5px;
+        cursor: pointer;
+
         }
 
 
@@ -108,17 +111,17 @@
         <h1>Login</h1>
         <form method="POST" action="{% url 'login' %}">{% csrf_token %}
 
-        <input type="text" placeholder="nome" name="nome" required>
+        <input class="barra" type="text" placeholder="nome" name="nome" required>
          <br>
          <br>
-        <input type="password" placeholder="senha" name="senha" required>
+        <input class="barra" type="password" placeholder="senha" name="senha" required>
          <br>
          <br>
          <button class="login">Logar</button>
          <br>
          <br>
          <l>
-             <a class="cad" href="{% url 'index'%}">Voltar </a> </l>
+             <a class="volta" href="{% url 'index'%}">Voltar </a> </l>
 
 
 
