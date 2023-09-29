@@ -128,8 +128,6 @@ def produto(request):
         return render(request, 'produto.html')
 
 
-
-
 @login_required(login_url='../login/')
 def produto_detalhe(request, id):
     produto = Produtos.objects.get(active=True, id=id)
@@ -163,13 +161,14 @@ def gerar_pdf(request):
     p.setFont("Helvetica-Bold", 16)
     p.drawString(100, y, "Lista de Produtos")
     p.setFont("Helvetica", 12)
+    p.drawInlineImage({produto_filter}, x=120, y=110)
     y -= 30  # Ajuste a posição vertical para a próxima entrada de dados
 
     for produto in produto_filter.qs:
         p.drawString(100, y, f'Nome: {produto.nome}')
         p.drawString(100, y - 15, f'Categoria: {produto.tipo}')
         p.drawString(100, y - 30, f'foto:{produto.foto}')
-        #p.drawImage({produto.foto}, x=100, y=-30)
+        p.drawImage({produto.foto}, x=100, y=-30)
         # Adicione mais campos do produto conforme necessário
 
         y -= 50  # Ajuste a posição vertical para a próxima entrada de dados

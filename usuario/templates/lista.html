@@ -99,7 +99,7 @@
        </form>
        <ul>
            {% for produto in produtos %}
-                <li>{{ produto.nome }} - Categoria: {{ produto.tipo }} - <img src="{{produto.foto}}"></li>
+                <li>{{ produto.nome }} - Categoria: {{ produto.tipo }} - <img src="/media/{{produto.foto}}"></li>
            {% endfor %}
        </ul>
 
