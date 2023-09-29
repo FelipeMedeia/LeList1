@@ -128,8 +128,6 @@ def produto(request):
         return render(request, 'produto.html')
 
 
-
-
 @login_required(login_url='../login/')
 def produto_detalhe(request, id):
     produto = Produtos.objects.get(active=True, id=id)

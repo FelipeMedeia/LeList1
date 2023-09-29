@@ -6,3 +6,4 @@ crash.log
 
 # For built boxes
 *.box
+usuario/__pycache__/views.cpython-37.pyc

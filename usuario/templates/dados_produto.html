@@ -6,7 +6,7 @@
     <style>
         body {
             font-family: Arial, helvetica, sans-serif;
-            background-color:#caf4ff;
+            background-color: #fff;
             margin: 0% 30%;
             padding: 35px;
             position: absolute;
@@ -36,7 +36,7 @@
             background-color: #2F4F4F;
         }
         .exclui {
-          background-color: #00008B;
+          background-color: red;
           border: none;
           color: white;
           padding: 15px 32px;
@@ -49,7 +49,7 @@
             background-color: #00FFFF;
         }
         #menu {
-               background-color: #059FEC;
+               background-color: #2D0651;
                position: fixed;
                top: 0;
                left: 0;
@@ -72,13 +72,21 @@
 
            #menu li a {
                display: block;
-               color: black;
+               color: white;
                font-style: normal;
                font-size: 16px;
                text-align: center;
                text-decoration: none;
                padding: 16px;
-               border: 1px solid black;
+           }
+           .pad{
+                background-color: #AD77C2;
+                display: flex;
+                flex-wrap: wrap;
+                justify-content: space-around;
+                margin-block-end: 1px;
+                text-decoration: none;
+
            }
     </style>
 
@@ -92,8 +100,8 @@
            </ul>
        </div>
     <h1>Detalhes do produto</h1>
-    <div >
-        <div style="border-color: blue; border-style: solid; border: auto; ">
+    <div class="pad">
+        <div style="justify-content: center; ">
             <img src="{{produto.foto.url}}" width="300px;" height="300px;" style="margin-top: 10px;">
         </div>
 

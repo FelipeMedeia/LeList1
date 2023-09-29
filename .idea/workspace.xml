@@ -25,12 +25,17 @@
   <component name="PropertiesComponent">
     <property name="DefaultHtmlFileTemplate" value="HTML File" />
     <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/../Projeto_Lelist" />
-    <property name="settings.editor.selected.configurable" value="project.propVCSSupport.Mappings" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/../Acompanhagym" />
+    <property name="settings.editor.selected.configurable" value="com.jetbrains.python.configuration.PyActiveSdkModuleConfigurable" />
   </component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
       <recent name="C:\Users\felip\PycharmProjects\LeList\media\produto" />
+    </key>
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\Users\felip\PycharmProjects\LeList\usuario\templates" />
+      <recent name="C:\Users\felip\PycharmProjects\LeList\usuario" />
+      <recent name="C:\Users\felip\PycharmProjects\LeList\Lelist" />
     </key>
   </component>
   <component name="RunDashboard">

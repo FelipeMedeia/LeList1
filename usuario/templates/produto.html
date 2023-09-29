@@ -7,7 +7,7 @@
             border: none;
         }
         .meio{
-            background-color: #6BDCFF;
+            background-color: #ffffff;
             position: absolute;
             top: 50%;
             left: 50%;
@@ -19,13 +19,13 @@
 
         body {
             font-family: Arial, helvetica, sans-serif;
-            background-color:#caf4ff;
+            background-color: #AD77C2;
             margin: 0;
             padding: 0;
         }
 
         #menu {
-            background-color: #059FEC;
+            background-color: #2D0651;
             position: fixed;
             top: 0;
             left: 0;
@@ -49,13 +49,13 @@
 
         #menu li a {
             display: block;
-            color: black;
+            color: white;
             font-style: normal;
             font-size: 16px;
             text-align: center;
             text-decoration: none;
             padding: 16px;
-            border: 1px solid black;
+            border: none;
         }
 
         .logo {
@@ -64,6 +64,7 @@
 
         #menu li a:hover {
             background-color: white;
+            color: black;
         }
         #add{
             background-color: #8CFFF7;
@@ -73,6 +74,9 @@
             color: dark;
             font-size: 15px;
 
+        }
+        h1{
+            color: #2D0651;
         }
 
 
@@ -89,12 +93,13 @@
         </ul>
     </div>
     <div class="meio">
+        <h1>Produtos</h1>
         <form action="{% url 'produto' %}" method="POST" enctype="multipart/form-data"> {% csrf_token %}
             <input type="number" class="form-control" name="produto-id" value="{{produto.id}}" hidden>
             <br>
             <input type="text" placeholder="nome do produto" name="nome" value="{{produto.nome}}" required>
-             <br>
-             <br>
+            <br>
+            <br>
             <select name="tipo"required>
                  <option value="" disabled selected >Selecione uma categoria</option>
                  <option value="Cosmetico" >Cosmetico</option>
