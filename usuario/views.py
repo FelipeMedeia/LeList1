@@ -86,7 +86,7 @@ def home_filter(request):
 @login_required(login_url='../login/')
 def listar_produtos(request):
     produto = Produtos.objects.filter(user=request.user, active=True)
-    return render(request, 'lista.html', {'produto': produto})
+    return render(request, 'relatorio.html', {'produto': produto})
 
 
 @login_required(login_url='../login/')
@@ -161,14 +161,13 @@ def gerar_pdf(request):
     p.setFont("Helvetica-Bold", 16)
     p.drawString(100, y, "Lista de Produtos")
     p.setFont("Helvetica", 12)
-    p.drawInlineImage({produto_filter}, x=120, y=110)
     y -= 30  # Ajuste a posição vertical para a próxima entrada de dados
 
     for produto in produto_filter.qs:
         p.drawString(100, y, f'Nome: {produto.nome}')
         p.drawString(100, y - 15, f'Categoria: {produto.tipo}')
         p.drawString(100, y - 30, f'foto:{produto.foto}')
-        p.drawImage({produto.foto}, x=100, y=-30)
+        #p.drawImage({produto.foto}, x=100, y=-30)
         # Adicione mais campos do produto conforme necessário
 
         y -= 50  # Ajuste a posição vertical para a próxima entrada de dados
