@@ -25,83 +25,57 @@
             font-size: 15px;
         }
         .confirma{
-            background-color: #00BFFF;
+            background-color: #900090;
             border: none;
             padding: 15px;
             position: relative;
+            top:15px;
 
             border-radius: 20px;
             color: dark;
             font-size: 15px;
         }
         .limpa{
-            background-color: #708090;
+            background-color: #ffa500;
             border: none;
             padding: 15px;
             position: relative;
+            top: 15px;
+            left: 120px;
             border-radius: 20px;
-            color: dark;
             font-size: 15px;
         }
         .volta{
-            background-color: #0000CD;
+            background-color: #708090;
             position: relative;
             border: none;
             padding: 15px;
+            top: 65px;
             width: 30%;
             border-radius: 20px;
-            color: #FFFFFF;
+            color: #000;
             text-decoration: none;
-            text-align: center;
 
-            font-style: normal;
-            font-size: 16px;
         }
         .volta:hover{
-            background-color: #3CB371;
+            background-color: #708090;
             cursor: pointer;
             color: #fff;
+            box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
         }
         .confirma:hover{
-            background-color: #00FFFF;
+            background-color: #2D0651;
             cursor: pointer;
             color: white;
+            box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
         }
         .limpa:hover{
-            background-color: #00FA9A;
+            background-color: #ffa500;
             cursor: pointer;
             color: white;
+            box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
         }
-        .L{
-        position: absolute;
-        width: 160px;
-        height: 226.67px;
-        left: 105px;
-        top: 73px;
 
-        font-family: 'Inter';
-        font-style: normal;
-        font-weight: 400;
-        font-size: 160px;
-        line-height: 194px;
-
-        color: #6BDCFF;
-        }
-        .elist{
-        position: relative;
-        width: 161.41px;
-        height: 56px;
-        left: 300px;
-        top: 389px;
-
-        font-family: 'Inter';
-        font-style: normal;
-        font-weight: 400;
-        font-size: 39.5294px;
-        line-height: 48px;
-
-        color: white;
-        }
         .alert{
             position: absolute;
             color: red;
@@ -154,14 +128,19 @@
         cursor: pointer;
 
         }
+        .L{
+        position: relative;
+        top: 130px;
+        left: 5px;
+
+        }
 
     </style>
 </head>
 <body>
     <div class="L">
             <img src="/media/logo.png" alt="imagem" width="500px" height="500px">
-        
-        </div>
+    </div>
     <div class="back">
         <h1>Cadastre-se</h1>
         <form method="POST" action="{% url 'cadastro' %}">{% csrf_token %}
