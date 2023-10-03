@@ -56,6 +56,7 @@
             text-decoration: none;
             padding: 16px;
             border: none;
+            border: 1px solid black;
         }
 
         .logo {
@@ -63,20 +64,48 @@
         }
 
         #menu li a:hover {
-            background-color: white;
+            background-color: rgb(129, 88, 210);
             color: black;
-        }
-        #add{
-            background-color: #8CFFF7;
-            border: none;
-            padding: 15px;
-            border-radius: 20px;
-            color: dark;
-            font-size: 15px;
-
         }
         h1{
             color: #2D0651;
+        }
+
+        .barra{
+        width: 250px;
+        height: 35px;
+        flex-shrink: 0;
+        border-radius: 25px;
+
+        border-radius: 25px;
+        border: 1px solid purple;
+        background: #D9D9D9;
+        box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
+        background: #fff;
+        position: relative;
+        top:15px;
+        justify-content: center;
+        padding: 3px;
+        cursor: pointer;
+
+        }
+        .add{
+            position: relative;
+            top: 55px;
+            border-radius: 25px;
+            color: white;
+            background-color: #2D0651;
+            padding: 10px;
+
+        }
+        .photo{
+            position: relative;
+            top: 15px;
+            padding: 10px;
+            background-color: #900090;
+            color: white;
+            border-radius: 25px;
+
         }
 
 
@@ -87,7 +116,7 @@
     <div id="menu">
         <ul>
             <li>
-                <a href="{% url 'home'%}">HOME</a>
+                <a href="{% url 'home'%}">Home</a>
             </li>
 
         </ul>
@@ -97,10 +126,10 @@
         <form action="{% url 'produto' %}" method="POST" enctype="multipart/form-data"> {% csrf_token %}
             <input type="number" class="form-control" name="produto-id" value="{{produto.id}}" hidden>
             <br>
-            <input type="text" placeholder="nome do produto" name="nome" value="{{produto.nome}}" required>
+            <input class="barra" type="text" placeholder="nome do produto" name="nome" value="{{produto.nome}}" required>
             <br>
             <br>
-            <select name="tipo"required>
+            <select class="barra" name="tipo"required>
                  <option value="" disabled selected >Selecione uma categoria</option>
                  <option value="Cosmetico" >Cosmetico</option>
                  <option value="Perfume" >Perfume</option>
@@ -109,13 +138,13 @@
 
              <br>
              <br>
-             <input type="number" placeholder="quantidade" name="quantidade" value="{{produto.quantidade}}" required>
+             <input class="barra" type="number" placeholder="quantidade" name="quantidade" value="{{produto.quantidade}}" required>
              <br>
              <br>
-             <input type="date" name="data_validade" value="{{produto.data_validade}}" required>
+             <input class="barra" type="date" name="data_validade" value="{{produto.data_validade}}" required>
              <br>
              <br>
-             <input type="file" placeholder="imagem do produto" name="file" value="{{produto.file}}" required>
+             <input class="photo" type="file" placeholder="imagem do produto" name="file" value="{{produto.file}}" required>
              <br>
              <br>
              {% if produto %}
@@ -134,7 +163,6 @@
 
 </body>
 </html>
-
 
 
 

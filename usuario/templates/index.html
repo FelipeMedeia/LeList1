@@ -7,48 +7,18 @@
         body{
             font-family: Arial, helvetica, sans-serif;
             background-color: #AD77C2;
+
         }
         .back{
-            background-color: #0000;
-            position: absolute;
-            top: 70%;
-            right: 50%;
-            transform: translate(-50%, -50%);
+            position: relative;
+            top: 30px;
+            right: 30px;
             padding: 80px;
-            border-radius: 35px;
-            color: #fff;
             display: flex;
             flex-direction: column;
-            align-items: center;
+            align-items: left;
         }
-        .L{
-            position: left;
-            width: 160px;
-            height: 226.67px;
-            left: 105px;
-            top: 18px;
-            font-family: 'Inter';
-            font-style: normal;
-            font-weight: 400;
-            font-size: 100px;
-            display: flex;
-            line-height: 120px;
-            color: #6BDCFF;
-        }
-        .elist{
-            position: absolute;
-            width: 161.41px;
-            height: 56px;
-            left: 150px;
-            top: 150px;
-            display: flex;
-            font-family: 'Inter';
-            font-style: normal;
-            font-weight: 400;
-            font-size: 39.5294px;
-            line-height: 48px;
-            color: white;
-        }
+
         .login, .cad{
             background-color: #ffffff;
             position: relative;
@@ -59,7 +29,6 @@
             color: #000000;
             text-decoration: none;
             text-align: center;
-            font-style: normal;
             font-size: 16px;
             margin: 10px 5px;
         }
@@ -68,14 +37,16 @@
             color: #ffffff;
         }
         .login:hover{
-            background-color: #00BFFF;
+            background-color: #800080;
             color: #FFFFFF;
+            box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
         }
         .cad:hover{
-            background-color: #00CED1;
+            background-color: #900090;
             color: #FFFFFF;
+            box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
         }
-        .conteudo{
+        .conteudo, .conteudo2, .conteudo3{
             width:30%;
             height: auto;
             background-color: #2D0651;
@@ -89,39 +60,17 @@
             color: #ffffff;
         }
         .conteudo2{
-            width:30%;
-            height: auto;
-            background-color: #2D0651;
-            position: absolute;
             top: 50%;
-            display: flex;
             left: 70%;
-            transform: translate(-50%, -50%);
-            padding: 30px;
-            border-radius: 35px;
-            color: #ffffff;
         }
         .conteudo3{
-            width:30%;
-            height: auto;
-            background-color: #2D0651;
-            position: absolute;
             top: 70%;
             left: 60%;
-            display: flex;
-            transform: translate(-50%, -50%);
-            padding: 30px;
-            border-radius: 35px;
-            color: #ffffff;
         }
+
     </style>
 </head>
 <body>
-    <div class="L">
-        <img src="/media/logo.png" alt="imagem" width="500px" height="500px">
-    </div>
-    
-  
     <div class="conteudo">
         <p>
             Um sistema de fácil cadastro!
@@ -143,6 +92,7 @@
 
 
     <div class="back">
+        <img src="/media/logo.png" width="500px" height="500px">
         <form>
             <a class="login" href="{% url 'login'%}">Tela de Login</a>
             <a class="cad" href="{% url 'cadastro'%}">Cadastro</a>
