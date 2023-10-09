@@ -8,7 +8,7 @@ from .models import Produtos
 from django.contrib.auth.decorators import login_required
 from usuario.filters import ProdutoFilter
 from reportlab.pdfgen import canvas
-
+from PIL import Image
 
 # Create your views here.
 
@@ -164,15 +164,21 @@ def gerar_pdf(request):
     y -= 30  # Ajuste a posição vertical para a próxima entrada de dados
 
     for produto in produto_filter.qs:
+        imagem = Image.open(produto.foto.path)  
+        width, height = imagem.size
+        aspect_ratio = height / width
+        new_width = 400  # Defina a largura desejada para a imagem no PDF
+        new_height = int(new_width * aspect_ratio)
+        
         p.drawString(100, y, f'Nome: {produto.nome}')
         p.drawString(100, y - 15, f'Categoria: {produto.tipo}')
-        p.drawString(100, y - 30, f'foto:{produto.foto}')
-        #p.drawImage({produto.foto}, x=100, y=-30)
-        # Adicione mais campos do produto conforme necessário
 
-        y -= 50  # Ajuste a posição vertical para a próxima entrada de dados
+        # Desenhe a imagem abaixo das informações do produto
+        p.drawImage(produto.foto.path, x=100, y=y - new_height - 20, width=new_width, height=new_height)
 
-    p.showPage()
+        y -= new_height + 30  # Ajuste a posição vertical para a próxima entrada de dados
+
     p.save()
 
     return response
+
