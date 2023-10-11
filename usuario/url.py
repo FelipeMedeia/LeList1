@@ -12,7 +12,7 @@ urlpatterns = [
     path('home/filter/', views.home_filter, name='filter'),
     path('logout/', auth_views.LogoutView.as_view(), name='logout'),
     path('produto/', views.produto, name='produto'),
-    path('relatorio/', views.gerar_pdf, name='relatorio'),
+    path('relatorio/', views.some_view, name='relatorio'),
     path('detalhes/<id>/', views.produto_detalhe),
     path('detalhes/excluir/<id>/', views.excluir_produto, name='excluir'),
     path('home/duvidas/', views.duvidas, name='duvida')

@@ -29,13 +29,14 @@
     <property name="settings.editor.selected.configurable" value="com.jetbrains.python.configuration.PyActiveSdkModuleConfigurable" />
   </component>
   <component name="RecentsManager">
-    <key name="CopyFile.RECENT_KEYS">
-      <recent name="C:\Users\felip\PycharmProjects\LeList\media\produto" />
-    </key>
     <key name="MoveFile.RECENT_KEYS">
       <recent name="C:\Users\felip\PycharmProjects\LeList\usuario\templates" />
       <recent name="C:\Users\felip\PycharmProjects\LeList\usuario" />
       <recent name="C:\Users\felip\PycharmProjects\LeList\Lelist" />
+    </key>
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\Users\felip\PycharmProjects\LeList\media" />
+      <recent name="C:\Users\felip\PycharmProjects\LeList\media\produto" />
     </key>
   </component>
   <component name="RunDashboard">

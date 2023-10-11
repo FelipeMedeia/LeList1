@@ -94,16 +94,20 @@
        <div>
            <h2 class="titulo"> Relatório</h2>
        </div>
-       <form method="get" action="{% url 'relatorio' %}">
-            <a href="{% url 'relatorio' %}" target="_blank" class="btn btn-primary">Gerar PDF</a>
-       </form>
+
+       <div>
+
        <ul>
-           {% for produto in produtos %}
-                <li>{{ produto.nome }} - Categoria: {{ produto.tipo }} - <img src="/media/{{produto.foto}}"></li>
+           <form method="GET" action="{% url 'relatorio' %}">
+                <a href="{% url 'relatorio' %}" target="_blank" class="btn btn-primary">Gerar PDF</a>
+
+            </form>
+
+           {% for p in produto_filter %}
+                <li>Nome: {{ p.nome }} - Categoria: {{ p.tipo }} - <img src="{{p.foto}}"></li>
            {% endfor %}
+
        </ul>
-
-
 
        </div>
 

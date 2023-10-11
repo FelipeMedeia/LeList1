@@ -107,6 +107,12 @@
             border-radius: 25px;
 
         }
+        .alert{
+            position: absolute;
+            color: red;
+            top: 80%;
+            left: 49%;
+        }
 
 
     </style>
@@ -157,6 +163,11 @@
              {% endif %}
         </form>
     </div>
+    {% for message in messages%}
+        <div class="alert">
+            <strong>Error!</strong>{{message}}
+        </div>
+    {% endfor%}
 
 
 

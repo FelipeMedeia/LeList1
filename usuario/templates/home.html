@@ -24,7 +24,8 @@
 
         #menu {
             background-color: #2D0651;
-            position: fixed;
+            position: absolute;
+            text-align: space-around;
             top: 0;
             left: 0;
             width: 100%;
@@ -37,6 +38,7 @@
             overflow: hidden;
             display: flex;
             justify-content: space-around;
+            align-items: center;
         }
 
         #menu li {
@@ -46,6 +48,7 @@
 
         #menu li a {
             display: block;
+            height: 56px;
             color: white;
             font-style: normal;
             font-size: 16px;
@@ -59,9 +62,10 @@
             color: #6BDCFF;
         }
 
-        #menu li a:hover {
-            background-color: rgb(129, 88, 210);
+        #menu ul li:hover {
+            background-color: #AD77C2;
             color: black;
+            justify-content: space-around;
             border: 1px solid white;
         }
 
@@ -112,13 +116,13 @@
     <div id="menu">
         <ul>
             <li>
-                <a href="{% url 'home'%}">LELIST</a>
+                <a href="{% url 'home' %}"> <img src="/media/logo.png" alt="imagem" width=60px height="60px"></a>
             </li>
             <li>
-                <a href="{% url 'produto'%}">Produtos</a>
+                <a href="{% url 'produto' %}">Produtos</a>
             </li>
             <li>
-                <a href="{% url 'relatorio'%}">Gerar PDF</a>
+                <a href="{% url 'relatorio' %}">Gerar PDF</a>
             </li>
             <li>
                 <a href="{% url 'duvida' %}">Dúvida</a>

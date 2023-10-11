@@ -7,16 +7,17 @@
         body{
             font-family: Arial, helvetica, sans-serif;
             background-color: #AD77C2;
+            font-size: 25px;
 
         }
         .back{
-            position: relative;
-            top: 30px;
-            right: 30px;
+            position: absolute;
+            top: 50%;
+            left: 60%;
+            transform: translate(-50%, -50%);
             padding: 80px;
             display: flex;
             flex-direction: column;
-            align-items: left;
         }
 
         .login, .cad{
@@ -47,51 +48,47 @@
             box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
         }
         .conteudo, .conteudo2, .conteudo3{
-            width:30%;
             height: auto;
+            position: relative;
+            left: 30%;
             background-color: #2D0651;
-            position: absolute;
-            top: 30%;
-            left: 60%;
-            display: flex;
-            transform: translate(-50%, -50%);
             padding: 30px;
             border-radius: 35px;
             color: #ffffff;
         }
         .conteudo2{
-            top: 50%;
-            left: 70%;
+            left: 40%;
         }
-        .conteudo3{
-            top: 70%;
-            left: 60%;
+
+        .logo{
+            position: relative;
+            top: 130px;
+            left: 5px;
+            display: flex;
+            align-items: center;
+            justify-content: space-around;
+            align-content: flex-start;
+            flex-direction: column;
+            flex-wrap: wrap;
         }
+
 
     </style>
 </head>
 <body>
-    <div class="conteudo">
-        <p>
+    <div class="back">
+        <p class="conteudo">
             Um sistema de fácil cadastro!
         </p>
-
-    </div>
-    <div class="conteudo2">
-         <p>
+         <p class="conteudo2">
             Venha organizar seus produtos.
          </p>
-
-    </div>
-    <div class="conteudo3">
-        <p>
+        <p class="conteudo3">
             Todo seu estoque visivel com poucos cliques!
         </p>
-
+        </div>
     </div>
-
-
-    <div class="back">
+    <div class="logo">
         <img src="/media/logo.png" width="500px" height="500px">
         <form>
             <a class="login" href="{% url 'login'%}">Tela de Login</a>
