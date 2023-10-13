@@ -1,5 +1,7 @@
 <!DOCTYPE html>
+<html lang="pt-br">
 <head>
+    <meta charset="UTF-8">
     <style>
         .top{
             background-color: #caf4ff ;
@@ -64,7 +66,7 @@
         }
 
         #menu li a:hover {
-            background-color: rgb(129, 88, 210);
+            background-color: #AD77C2;
             color: black;
         }
         h1{
@@ -135,7 +137,7 @@
             <input class="barra" type="text" placeholder="nome do produto" name="nome" value="{{produto.nome}}" required>
             <br>
             <br>
-            <select class="barra" name="tipo"required>
+            <select class="barra" name="tipo" required>
                  <option value="" disabled selected >Selecione uma categoria</option>
                  <option value="Cosmetico" >Cosmetico</option>
                  <option value="Perfume" >Perfume</option>
@@ -168,9 +170,6 @@
             <strong>Error!</strong>{{message}}
         </div>
     {% endfor%}
-
-
-
 
 </body>
 </html>

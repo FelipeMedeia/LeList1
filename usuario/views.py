@@ -5,15 +5,10 @@ from django.shortcuts import render, redirect
 from django.contrib.auth.models import User
 from django.contrib.auth import authenticate
 from django.contrib.auth import login as login_imp
-
 from .models import Produtos
 from django.contrib.auth.decorators import login_required
 from usuario.filters import ProdutoFilter
 from reportlab.pdfgen import canvas
-import io
-from django.http import FileResponse
-
-from django.template.loader import get_template
 
 
 # Create your views here.
@@ -185,45 +180,6 @@ def gerar_pdf(request):
 
     return response
 
-
-'''def some_view(request):
-    queryset = Produtos.objects.filter(user=request.user, active=True)
-    produto_filter = ProdutoFilter(request.GET, queryset=queryset)
-    # Create a file-like buffer to receive PDF data.
-    buffer = io.BytesIO()
-
-    # Create the PDF object, using the buffer as its "file."
-    pdf = canvas.Canvas(buffer)
-
-    y = 750
-
-    pdf.setFont("Helvetica-Bold", 16)
-    pdf.drawString(250, y, "Lista de Produtos")
-    pdf.setFont("Helvetica", 12)
-    y -= 30
-
-    # Draw things on the PDF. Here's where the PDF generation happens.
-    # See the ReportLab documentation for the full list of functionality.
-    for produto in produto_filter.qs:
-        imagem = Image.open(produto.foto.path)
-        width, height = imagem.size
-        aspect_ratio = height / width
-        new_width = 100
-        new_height = int(new_width * aspect_ratio)
-
-        pdf.drawImage(produto.foto.path, 100, y - 50, width=new_width, height=new_height)
-        pdf.drawString(100, y - 60, f'Nome: {produto.nome}')
-        pdf.drawString(100, y - 70, f'Categoria: {produto.tipo}')
-
-        # Adicione mais campos do produto conforme necessário
-
-        y -= new_height + 60
-        pdf.showPage()
-
-    pdf.showPage()
-    pdf.save()
-    buffer.seek(0)
-    return FileResponse(buffer, filename="Lista_de_produtos.pdf")'''
 
 
 @login_required(login_url='../login/')

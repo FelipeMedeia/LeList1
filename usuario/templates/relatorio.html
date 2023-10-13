@@ -99,9 +99,8 @@
 
        <ul>
            <form method="GET" action="{% url 'relatorio' %}">
-                <a href="{% url 'relatorio' %}" target="_blank" class="btn btn-primary">Gerar PDF</a>
-
-            </form>
+               <a href="{% url 'relatorio' %}" target="_blank" class="btn btn-primary">Gerar PDF</a>
+           </form>
 
            {% for p in produto_filter %}
                 <li>Nome: {{ p.nome }} - Categoria: {{ p.tipo }} - <img src="{{p.foto}}"></li>
