@@ -1,7 +1,9 @@
 from django.contrib import messages
 from django.http.response import HttpResponse, HttpResponseRedirect
 from django.shortcuts import render, redirect
+from django.core.files.base import ContentFile
 from django.contrib.auth.models import User
+from django.core.files.storage import default_storage
 from django.contrib.auth import authenticate
 from django.contrib.auth import login as login_imp, logout
 from .models import Produtos
@@ -9,6 +11,7 @@ from django.contrib.auth.decorators import login_required
 from usuario.filters import ProdutoFilter
 from reportlab.pdfgen import canvas
 from PIL import Image
+import os
 
 # Create your views here.
 
@@ -106,17 +109,25 @@ def produto(request):
         foto = request.FILES.get('file')
         produto_id = request.POST.get('produto-id')
         user = request.user
+
         if produto_id:
             produto = Produtos.objects.get(id=produto_id)
             if user == produto.user:
+                # Verifique se uma nova imagem foi enviada
+                if foto:
+                    # Exclua a imagem anterior se existir
+                    if produto.foto:
+                        # Use o caminho do arquivo anterior para excluí-lo
+                        if default_storage.exists(produto.foto.name):
+                            default_storage.delete(produto.foto.name)
+
+                    # Salve a nova imagem no local de upload
+                    produto.foto.save(foto.name, ContentFile(foto.read()))
                 produto.nome = nome
                 produto.tipo = tipo
                 produto.quantidade = quantidade
                 produto.data_validade = data_validade
-                if foto:
-                    produto.foto = foto
                 produto.save()
-
         else:
             produto = Produtos.objects.filter(nome=nome, user=user, data_validade=data_validade).first()
             if produto:
@@ -135,7 +146,14 @@ def produto_detalhe(request, id):
 
 
 @login_required(login_url='../login/')
-def excluir_produto(request, id):
+def excluir_produto(request, id): 
+    user = request.user
+    if id:
+            produto = Produtos.objects.get(id=id)
+            if user == produto.user:
+                # Verifique se uma nova imagem foi enviada
+                 default_storage.delete(produto.foto.name)
+            produto.save()
     produto = Produtos.objects.get(id=id)
     produto.delete()
     return redirect('/home/')
@@ -181,4 +199,3 @@ def gerar_pdf(request):
     p.save()
 
     return response
-

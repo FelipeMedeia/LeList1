@@ -1,178 +1,57 @@
-<html>
+<!DOCTYPE html>
 <html lang="pt-br">
 <head>
     <meta charset="UTF-8">
     <title>Página de Cadastro</title>
-    <style>
-        body{
-            font-family: Arial, helvetica, sans-serif;
-            background-color: #AD77C2;
-        }
-        .back{
-            background-color: #fff;
-            position: absolute;
-            top: 50%;
-            left: 60%;
-            transform: translate(-50%, -50%);
-            padding: 80px;
-            border-radius: 35px;
-            color: #000000;
-        }
-        input{
-            padding: 12px;
-            border: none;
-            outline: none;
-            font-size: 15px;
-        }
-        .confirma{
-            background-color: #900090;
-            border: none;
-            padding: 15px;
-            position: relative;
-            top:15px;
-            left: 200px;
-            border-radius: 20px;
-            color: dark;
-            font-size: 15px;
-        }
-        .limpa{
-            background-color: #ffa500;
-            border: none;
-            padding: 15px;
-            position: relative;
-            top: 15px;
-           
-            border-radius: 20px;
-            font-size: 15px;
-        }
-        .volta{
-            
-            background-color: #708090;
-            position: relative;
-            border: none;
-            padding: 15px;
-            top: -38px;
-            width: 30%;
-            border-radius: 20px;
-            color: #000;
-            text-decoration: none;
-
-        }
-        .volta:hover{
-            background-color: #708090;
-            cursor: pointer;
-            color: #fff;
-            box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
-        }
-        .confirma:hover{
-            background-color: #2D0651;
-            cursor: pointer;
-            color: white;
-            box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
-        }
-        .limpa:hover{
-            background-color: #ffa500;
-            cursor: pointer;
-            color: white;
-            box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
-        }
-
-        .alert{
-            position: absolute;
-            color: red;
-            top: 80%;
-            left: 49%;
-        }
-        .modal {
-            display: none;
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background-color: rgba(0, 0, 0, 0.7);
-            align-items: center;
-            justify-content: center;
-        }
-
-        .modal-content {
-            background-color: #2D0651;
-            color: #fff;
-            width: 300px; /* Largura */
-            height: 200px; /* Altura */
-            padding: 10px;
-            border-radius: 10px;
-            text-align: center;
-            position: relative;
-            top: 50%; /* Centraliza verticalmente */
-            left: 50%; /* Centraliza horizontalmente */
-            transform: translate(-50%, -50%);
-        }
-        h1{
-            color: #2D0651;
-        }
-        .barra{
-        width: 300px;
-        height: 35px;
-        flex-shrink: 0;
-        border-radius: 25px;
-
-        border-radius: 25px;
-        border: 1px solid purple;
-        background: #D9D9D9;
-        box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
-        background: #fff;
-        position: relative;
-        top:15px;
-        justify-content: center;
-        padding: 5px;
-        cursor: pointer;
-
-        }
-        .L{
-        position: relative;
-        top: 130px;
-        left: 5px;
-
-        }
-
-    </style>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
 </head>
-<body>
-    <div class="L">
-            <img src="/media/logo.png" alt="imagem" width="500px" height="500px">
-    </div>
-    <div class="back">
-        <h1>Cadastre-se</h1>
-        <form method="POST" action="{% url 'cadastro' %}">{% csrf_token %}
-        <input class="barra" type="text" placeholder="Digite seu nome" name="nome" required>
-         <br>
-         <br>
-        <input class="barra" type="email" placeholder="Exp.: aa@.com" name="email" required>
-         <br>
-         <br>
-         <input class="barra" type="password" placeholder="Digite sua senha" name="senha" required>
-         <br>
-         <br>
-         <button class="confirma">Cadastrar</button>
-         <button class="limpa" type="reset">Limpar</button>
-            <br>
-            <br>
-            <a class="volta" href="{% url 'index'%}">voltar </a>
-        </form>
-    </div>
-    {% for message in messages%}
-            <div class="alert">
-                <strong>Error!</strong>{{message}}
+<body style="background-color: #AD77C2;">
+    <div class="container " style="border-radius: 40px;" >
+        <div class="row justify-content-center" style="margin-top: 10%; border-radius: 40px;">
+            <div class="col-md-6" >
+                <div class="card" style="border-radius: 40px;">
+                    <div class="card-header" style="background-color: #fff; ">
+                        <h1 class="text-center">Cadastre-se</h1>
+                    </div>
+                    <div class="card-body" >
+                        <form method="POST" action="{% url 'cadastro' %}">
+                            {% csrf_token %}
+                            <div class="form-group">
+                                <input type="text" class="form-control" placeholder="Digite seu nome" name="nome" required>
+                            </div>
+                            <div class="form-group">
+                                <input type="email" class="form-control" placeholder="Exp.: aa@.com" name="email" required>
+                            </div>
+                            <div class="form-group">
+                                <input type="password" class="form-control" placeholder="Digite sua senha" name="senha" required>
+                            </div>
+                            <div class="text-center">
+                                <button type="submit" class="btn btn-primary">Cadastrar</button>
+                                <button type="reset" class="btn btn-warning">Limpar</button>
+                            </div>
+                            <br>
+
+                        </form>
+                    </div>
+                </div>
             </div>
-    {% endfor%}
+        </div>
+    </div>
+    {% for message in messages %}
+        <div class="alert" style="position: absolute; color: red; top: 80%; left: 49%;">
+            <strong>Error!</strong> {{ message }}
+        </div>
+    {% endfor %}
     <div id="myModal" class="modal">
         <div class="modal-content">
             <p id="successMessage">Cadastro realizado com sucesso</p>
-            <button id="closeModal">OK</button>
+            <button id="closeModal" class="btn btn-success">OK</button>
         </div>
     </div>
 
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
     <script>
         // Função para mostrar a janela modal quando a variável cadastro_sucesso for True
         function showModal() {
