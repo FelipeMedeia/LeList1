@@ -3,17 +3,14 @@ from django.contrib import messages
 from django.core.files.base import ContentFile
 from django.core.files.storage import default_storage
 from django.http.response import HttpResponse
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect,get_object_or_404
 from django.core.files.base import ContentFile
 from django.contrib.auth.models import User
-from django.core.files.storage import default_storage
-from django.contrib.auth import authenticate
-from django.contrib.auth import login as login_imp
+from django.contrib.auth import authenticate, login as login_imp
 from .models import Produtos
 from django.contrib.auth.decorators import login_required
 from usuario.filters import ProdutoFilter
 from reportlab.pdfgen import canvas
-from PIL import Image
 import os
 
 # Create your views here.
@@ -132,19 +129,28 @@ def produto_detalhe(request, id):
     produto = Produtos.objects.get(active=True, id=id)
     return render(request, 'dados_produto.html', {'produto': produto})
 
-
 @login_required(login_url='../login/')
 def excluir_produto(request, id):
-    user = request.user
-    if id:
-        produto = Produtos.objects.get(id=id)
-        if user == produto.user:
-            # Verifique se uma nova imagem foi enviada
-            default_storage.delete(produto.foto.name)
-        produto.save()
-    produto = Produtos.objects.get(id=id)
+    produto = get_object_or_404(Produtos, id=id)
+    if produto.foto:
+        # Verifique se o produto possui uma imagem associada
+        default_storage.delete(produto.foto.name)
+
     produto.delete()
-    return redirect('/home/')
+    return redirect('/home/')  # Ou redirecione para outra página após a exclusão
+
+
+# def excluir_produto(request, id):
+#     user = request.user
+#     if id:
+#         produto = Produtos.objects.get(id=id)
+#         if user == produto.user:
+#             # Verifique se uma nova imagem foi enviada
+#             default_storage.delete(produto.foto.name)
+#         produto.save()
+#     produto = Produtos.objects.get(id=id)
+#     produto.delete()
+#     return redirect()
 
 
 def index(request):
