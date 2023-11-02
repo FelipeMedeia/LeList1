@@ -6,7 +6,7 @@
 {% endblock %}
 
 {% block content %}
-
+        <h1>Login</h1>
         <form method="POST" action="{% url 'login' %}">{% csrf_token %}
             <div class="form-group" >
                 <input class="form-control" style="border-color: #AD77C2; border-radius: 40px;" type="text" placeholder="Digite seu nome" name="nome" required>
