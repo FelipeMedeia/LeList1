@@ -1,95 +1,12 @@
-<!DOCTYPE html>
-<html lang="pt-br">
-<head>
-    <meta charset="UTF-8">
-    <title>Duvida</title>
-     <style>
-           body {
-               font-family: Arial, helvetica, sans-serif;
-               background-color: #ffffff;
-               margin: 16px;
-               padding: 33px;
-           }
+{% extends './static/html/base_interna.html' %}
+{% load static %}
 
-           #menu {
-               background-color: #2D0651;
-               position: fixed;
-               top: 0;
-               left: 0;
-               width: 100%;
-               color: white;
-           }
+{% block titulo%}
+    <title>Dúvida</title>
+{% endblock %}
 
-           #menu ul {
-               list-style-type: none;
-               margin: 0;
-               padding: 0;
-               overflow: hidden;
-               display: flex;
-               justify-content: left;
-           }
-
-           #menu li {
-               position: relative;
-               width: 100%;
-           }
-
-           #menu li a {
-               display: block;
-               color: white;
-               font-style: normal;
-               font-size: 16px;
-               text-align: center;
-               text-decoration: none;
-               padding: 16px;
-               border: 1px solid black;
-           }
-
-           #menu li a:hover {
-               background-color: rgb(129, 88, 210);
-               color: white;
-
-           }
-
-           .gallery-container{
-                display: flex;
-                flex-wrap: wrap;
-                justify-content: space-evenly;
-                gap: 10vw;
-                padding: 0 5vw;
-                margin-block-end: 150px;
-           }
-           .gallery-items{
-                width: 340px;
-                height: 340px;
-
-           }
-           .gallery-items img{
-                margin-top: 20px;
-                width: 100%;
-                height: 100%;
-           }
-           .titulo{
-               color: black;
-               font-style: title;
-               font-size: 32px;
-               text-align: center;
-               text-decoration: none;
-               padding: 16px;
-
-           }
-       </style>
-</head>
-<body>
-    <div id="menu">
-           <ul>
-               <li>
-                   <a href="{% url 'home'%}">Home</a>
-               </li>
-
-           </ul>
-       </div>
-       <div>
+{% block content %}
+       <div class="container">
            <h2 class="titulo"> Dúvidas Frequentes</h2>
            <h3>* COMO CADASTRAR UM PRODUTO??</h3>
            <p>Na aba PRODUTO temos o acesso ao cadastramento dos produtos do seu panfleto
@@ -116,7 +33,4 @@
             <p>Para gerar o relatório dos produtos em PDF basta clicar em GERAR PDF, O PDF
                 será gerado automaticamente e salvo no dispositivo.</p>
        </div>
-
-
-</body>
-</html>
+{% endblock %}

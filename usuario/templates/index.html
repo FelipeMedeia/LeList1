@@ -1,102 +1,50 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>LeList</title>
-    <style>
-        body{
-            font-family: Arial, helvetica, sans-serif;
-            background-color: #AD77C2;
+{% extends './static/html/base_externa.html' %}
+{% load static %}
 
-        }
-        .back{
-            position: relative;
-            top: 30px;
-            right: 30px;
-            padding: 80px;
-            display: flex;
-            flex-direction: column;
-            align-items: left;
-        }
+{% block titulo%}
+    <title> Index </title>
+{% endblock %}
 
-        .login, .cad{
-            background-color: #ffffff;
-            position: relative;
-            border: none;
-            padding: 15px;
-            width: 40%;
-            border-radius: 20px;
-            color: #000000;
-            text-decoration: none;
-            text-align: center;
-            font-size: 16px;
-            margin: 10px 5px;
-        }
-        .cad{
-            background-color: #2D0651;
-            color: #ffffff;
-        }
-        .login:hover{
-            background-color: #800080;
-            color: #FFFFFF;
-            box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
-        }
-        .cad:hover{
-            background-color: #900090;
-            color: #FFFFFF;
-            box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
-        }
-        .conteudo, .conteudo2, .conteudo3{
-            width:30%;
-            height: auto;
-            background-color: #2D0651;
-            position: absolute;
-            top: 30%;
-            left: 60%;
-            display: flex;
-            transform: translate(-50%, -50%);
-            padding: 30px;
-            border-radius: 35px;
-            color: #ffffff;
-        }
-        .conteudo2{
-            top: 50%;
-            left: 70%;
-        }
-        .conteudo3{
-            top: 70%;
-            left: 60%;
-        }
+{% block content %}
+    <div id="carouselExampleControls" class="carousel slide" data-ride="carousel">
+      <div class="carousel-inner">
+        <div class="carousel-item active">
+          <img class="d-block w-100" src="../media/logo.png" alt="Primeiro Slide">
+        </div>
+        <div class="carousel-item">
+          <img class="d-block w-100" src="../media/produto/perfume1.jpeg" alt="Segundo Slide">
+        </div>
+        <div class="carousel-item">
+          <img class="d-block w-100" src="../media/produto/perfume2.jpeg" alt="Terceiro Slide">
+        </div>
+      </div>
+      <a class="carousel-control-prev" href="#carouselExampleControls" role="button" data-slide="prev">
+        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+        <span class="sr-only">Anterior</span>
+      </a>
+      <a class="carousel-control-next" href="#carouselExampleControls" role="button" data-slide="next">
+        <span class="carousel-control-next-icon" aria-hidden="true"></span>
+        <span class="sr-only">Próximo</span>
+      </a>
+    </div>
 
-    </style>
-</head>
-<body>
-    <div class="conteudo">
-        <p>
+    <div class="container">
+        <div class="conteudo">
             Um sistema de fácil cadastro!
-        </p>
-
-    </div>
-    <div class="conteudo2">
-         <p>
+        </div>
+         <div class="conteudo2">
             Venha organizar seus produtos.
-         </p>
-
-    </div>
-    <div class="conteudo3">
-        <p>
+         </div>
+        <div class="conteudo3">
             Todo seu estoque visivel com poucos cliques!
-        </p>
+        </div>
+    </div>
+    <div>
+        <div class="row-inline">
+           <button class="btn btn-light" style="background-color: #AD77C2; color: #fff; text-decoration: None;"> <a  href="{% url 'login'%}" >Tela de Login</a> </button>
+            <button class="btn btn-light" style="background-color: #2D0651; color: #fff; text-decoration: None;"><a  href="{% url 'cadastro'%}">Cadastro</a> </button>
+        </div>
 
     </div>
+{% endblock %}
 
-
-    <div class="back">
-        <img src="/media/logo.png" width="500px" height="500px">
-        <form>
-            <a class="login" href="{% url 'login'%}">Tela de Login</a>
-            <a class="cad" href="{% url 'cadastro'%}">Cadastro</a>
-        </form>
-    </div>
-</body>
-</html>

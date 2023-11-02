@@ -1,168 +1,60 @@
-<!DOCTYPE html>
-<head>
-    <style>
-        .top{
-            background-color: #caf4ff ;
-            padding: 40px;
-            border: none;
-        }
-        .meio{
-            background-color: #ffffff;
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            padding: 80px;
-            border-radius: 35px;
-            color: #000000;
-        }
+{% extends './static/html/base_interna.html' %}
+{% load static %}
 
-        body {
-            font-family: Arial, helvetica, sans-serif;
-            background-color: #AD77C2;
-            margin: 0;
-            padding: 0;
-        }
+{% block titulo%}
+    <title>Adicionar Produto</title>
+{% endblock %}
 
-        #menu {
-            background-color: #2D0651;
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-        }
+{% block content %}
+    <div class="container m-5 p-5" style="background-color: #AD77C2; border-radius: 40px;">
+        <div class="row justify-content-md-center">
+            <div class="col col-lg-2">
 
-        #menu ul {
-            list-style-type: none;
-            margin: 0;
-            padding: 0;
-            overflow: hidden;
-            display: flex;
-            justify-content: left;
-        }
+                <h1>Produtos</h1>
+                <form action="{% url 'produto' %}" method="POST" enctype="multipart/form-data"> {% csrf_token %}
+                    <input type="number" class="form-control" name="produto-id" value="{{produto.id}}" hidden>
+                    <br>
+                    <input class="barra" style="border-color: #AD77C2; border-radius: 40px;" type="text" placeholder="nome do produto" name="nome" value="{{produto.nome}}" required>
+                    <br>
+                    <br>
+                    <select class="barra" style="border-color: #AD77C2; border-radius: 40px;" name="tipo" required>
+                         <option value="" disabled selected >Selecione uma categoria</option>
+                         <option value="Cosmetico" >Cosmetico</option>
+                         <option value="Perfume" >Perfume</option>
+                         <option value="Higiene" >Higiene</option>
+                    </select>
 
-        #menu li {
-            position: relative;
-            width: 100%;
-        }
+                     <br>
+                     <br>
+                     <input class="barra" type="number" style="border-color: #AD77C2; border-radius: 40px;" placeholder="quantidade" name="quantidade" value="{{produto.quantidade}}" required>
+                     <br>
+                     <br>
+                     <input class="barra" type="date" style="border-color: #AD77C2; border-radius: 40px;" name="data_validade" value="{{produto.data_validade}}" required>
+                     <br>
+                     <br>
+                     <input class="photo" type="file" style="border-color: #AD77C2; border-radius: 40px; background-color: #fff;" placeholder="imagem do produto" name="file" value="{{produto.file}}" required>
+                     <br>
+                     <br>
+                     {% if produto %}
+                        <a href="/media/{{produto.foto}}" target="_blank"> Foto atual</a>
+                        <br>
+                        <br>
+                        <input type="submit" class="add" value="Alterar">
+                     {% else %}
+                        <input type="submit" class="btn btn-light" style="background-color: #2D0651; color: #fff;" value="Adicionar">
+                     {% endif %}
+                </form>
 
+            </div>
+        </div>
 
-        #menu li a {
-            display: block;
-            color: white;
-            font-style: normal;
-            font-size: 16px;
-            text-align: center;
-            text-decoration: none;
-            padding: 16px;
-            border: none;
-            border: 1px solid black;
-        }
-
-        .logo {
-            color: #6BDCFF;
-        }
-
-        #menu li a:hover {
-            background-color: rgb(129, 88, 210);
-            color: black;
-        }
-        h1{
-            color: #2D0651;
-        }
-
-        .barra{
-        width: 250px;
-        height: 35px;
-        flex-shrink: 0;
-        border-radius: 25px;
-
-        border-radius: 25px;
-        border: 1px solid purple;
-        background: #D9D9D9;
-        box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
-        background: #fff;
-        position: relative;
-        top:15px;
-        justify-content: center;
-        padding: 3px;
-        cursor: pointer;
-
-        }
-        .add{
-            position: relative;
-            top: 55px;
-            border-radius: 25px;
-            color: white;
-            background-color: #2D0651;
-            padding: 10px;
-
-        }
-        .photo{
-            position: relative;
-            top: 15px;
-            padding: 10px;
-            background-color: #900090;
-            color: white;
-            border-radius: 25px;
-
-        }
-
-
-    </style>
-
-</head>
-<body>
-    <div id="menu">
-        <ul>
-            <li>
-                <a href="{% url 'home'%}">Home</a>
-            </li>
-
-        </ul>
     </div>
-    <div class="meio">
-        <h1>Produtos</h1>
-        <form action="{% url 'produto' %}" method="POST" enctype="multipart/form-data"> {% csrf_token %}
-            <input type="number" class="form-control" name="produto-id" value="{{produto.id}}" hidden>
-            <br>
-            <input class="barra" type="text" placeholder="nome do produto" name="nome" value="{{produto.nome}}" required>
-            <br>
-            <br>
-            <select class="barra" name="tipo"required>
-                 <option value="" disabled selected >Selecione uma categoria</option>
-                 <option value="Cosmetico" >Cosmetico</option>
-                 <option value="Perfume" >Perfume</option>
-                 <option value="Higiene" >Higiene</option>
-            </select>
+    {% for message in messages%}
+        <div class="alert alert-danger" role="alert">
+            <strong>Error!</strong>{{message}}
+        </div>
+    {% endfor%}
 
-             <br>
-             <br>
-             <input class="barra" type="number" placeholder="quantidade" name="quantidade" value="{{produto.quantidade}}" required>
-             <br>
-             <br>
-             <input class="barra" type="date" name="data_validade" value="{{produto.data_validade}}" required>
-             <br>
-             <br>
-             <input class="photo" type="file" placeholder="imagem do produto" name="file" value="{{produto.file}}" required>
-             <br>
-             <br>
-             {% if produto %}
-                <a href="/media/{{produto.foto}}" target="_blank"> Foto atual</a>
-                <br>
-                <br>
-                <input type="submit" class="add" value="Alterar">
-             {% else %}
-                <input type="submit" class="add" value="Adicionar">
-             {% endif %}
-        </form>
-    </div>
-
-
-
-
-</body>
-</html>
-
+{% endblock %}
 
 
