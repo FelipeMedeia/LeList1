@@ -1,140 +1,30 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Dados produto</title>
-    <style>
-        body {
-            font-family: Arial, helvetica, sans-serif;
-            background-color: #fff;
-            margin: 0% 30%;
-            padding: 35px;
-            position: absolute;
-        }
+{% extends './static/html/base_interna.html' %}
+{% load static %}
 
-        .back{
+{% block titulo%}
+    <title>Dados do Produto</title>
+{% endblock %}
 
-            width: 160px;
-            font-family: 'Inter';
-            font-style: normal;
-            font-weight: 400;
-            font-size: 50px;
-            color: #6BDCFF;
-        }
-        .altera {
-          background-color: #FFFF00;
-          border: none;
-          color: #000;
-          padding: 15px 32px;
-          text-align: center;
-          text-decoration: none;
-          display: inline-block;
-          font-size: 16px;
-
-        }
-        .altera:hover{
-            background-color: #ffa500;
-        }
-        .exclui {
-          background-color: red;
-          border: none;
-          color: white;
-          padding: 15px 32px;
-          text-align: center;
-          text-decoration: none;
-          display: inline-block;
-          font-size: 16px;
-        }
-        .exclui:hover{
-            background-color: #2D0651;
-        }
-        #menu {
-               background-color: #2D0651;
-               position: fixed;
-               top: 0;
-               left: 0;
-               width: 100%;
-           }
-
-           #menu ul {
-               list-style-type: none;
-               margin: 0;
-               padding: 0;
-               overflow: hidden;
-               display: flex;
-               justify-content: left;
-           }
-
-           #menu li {
-               position: relative;
-               width: 30%;
-           }
-
-           #menu li a {
-               display: block;
-               color: white;
-               font-style: normal;
-               font-size: 16px;
-               text-align: center;
-               text-decoration: none;
-               padding: 16px;
-               border: 1px solid black;
-           }
-
-           #menu li a:hover {
-               background-color: rgb(129, 88, 210);
-               color: black;
-
-           }
-           .pad{
-                background-color: #AD77C2;
-                display: flex;
-                flex-wrap: wrap;
-                justify-content: space-around;
-                margin-block-end: 1px;
-                text-decoration: none;
-                text-align: center;
-
-           }
-           button{
-                margin: 5px;
-           }
-           a{
-                text-decoration: none;
-           }
-    </style>
-
-</head>
-<body>
-    <div id="menu">
-           <ul>
-               <li>
-                    <a href="{% url 'home'%}">Voltar</a>
-                </li>
-           </ul>
-       </div>
+{% block content %}
     <h1>Detalhes do produto</h1>
-    <div class="pad">
+    <div class="container">
         <div style="justify-content: center; ">
             <img src="{{produto.foto.url}}" width="300px;" height="300px;" style="margin-top: 10px;">
         </div>
 
-        <div>
+        <div class="container">
             <p><b>Nome: </b>{{produto.nome}}</p>
             <p><b>Categoria: </b>{{produto.tipo}}</p>
             <p><b>Data de Validade: </b>{{produto.data_validade}}</p>
             <p><b>Quantidade: </b>{{produto.quantidade}}</p>
             <a href="/produto/?id={{ produto.id }}">
-                <button type="button" class="altera">Alterar</button>
+                <button type="button" class="btn btn-warning">Alterar</button>
             </a>
             <a href="../excluir/{{produto.id}}/">
-                <button type="button" class="exclui">Excluir</button>
+                <button type="button" class="btn btn-danger">Excluir</button>
             </a>
 
         </div>
 
     </div>
-
-
-</body>
-</html>
+{% endblock %}

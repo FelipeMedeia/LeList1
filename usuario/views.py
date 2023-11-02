@@ -1,5 +1,7 @@
 from PIL import Image
 from django.contrib import messages
+from django.core.files.base import ContentFile
+from django.core.files.storage import default_storage
 from django.http.response import HttpResponse
 from django.shortcuts import render, redirect
 from django.contrib.auth.models import User
@@ -74,17 +76,6 @@ def home(request):
 
 
 @login_required(login_url='../login/')
-def home_filter(request):
-    categoria_filter = ProdutoFilter(request.GET, queryset=Produtos.objects.filter(user=request.user, active=True))
-
-    context = {
-        'form': categoria_filter.form,
-        'produto': categoria_filter.qs
-    }
-    return render(request, 'filter.html', context)
-
-
-@login_required(login_url='../login/')
 def produto(request):
     if request.method == "GET":
         produto_id = request.GET.get('id')
@@ -104,12 +95,20 @@ def produto(request):
         if produto_id:
             produto = Produtos.objects.get(id=produto_id)
             if user == produto.user:
+                # Verifique se uma nova imagem foi enviada
+                if foto:
+                    # Exclua a imagem anterior se existir
+                    if produto.foto:
+                        # Use o caminho do arquivo anterior para excluí-lo
+                        if default_storage.exists(produto.foto.name):
+                            default_storage.delete(produto.foto.name)
+
+                    # Salve a nova imagem no local de upload
+                    produto.foto.save(foto.name, ContentFile(foto.read()))
                 produto.nome = nome
                 produto.tipo = tipo
                 produto.quantidade = quantidade
                 produto.data_validade = data_validade
-                if foto:
-                    produto.foto = foto
                 produto.save()
 
         else:
@@ -133,6 +132,13 @@ def produto_detalhe(request, id):
 
 @login_required(login_url='../login/')
 def excluir_produto(request, id):
+    user = request.user
+    if id:
+        produto = Produtos.objects.get(id=id)
+        if user == produto.user:
+            # Verifique se uma nova imagem foi enviada
+            default_storage.delete(produto.foto.name)
+        produto.save()
     produto = Produtos.objects.get(id=id)
     produto.delete()
     return redirect('/home/')
@@ -144,46 +150,6 @@ def index(request):
 
 @login_required(login_url='../login/')
 def gerar_pdf(request):
-    queryset = Produtos.objects.filter(user=request.user, active=True)
-    produto_filter = ProdutoFilter(request.GET, queryset=queryset)
-
-    response = HttpResponse(content_type='application/pdf')
-    # se quiser baixar diretamente
-    # response['Content-Disposition'] = 'attachment; filename="lista_de_produtos.pdf"'
-
-    # vizualiza o pdf
-    response['Content-Disposition'] = 'filename="lista_de_produtos.pdf"'
-    pdf = canvas.Canvas(response)
-
-    # Configure a posição inicial para escrever os dados no PDF
-    y = 750
-
-    pdf.setFont("Helvetica-Bold", 16)
-    pdf.drawString(100, y, "Lista de Produtos")
-    pdf.setFont("Helvetica", 12)
-    y -= 30  # Ajuste a posição vertical para a próxima entrada de dados
-
-    for produto in produto_filter.qs:
-        imagem = Image.open(produto.foto.path)
-        width, height = imagem.size
-        aspect_ratio = height / width
-        new_width = 100
-        new_height = int(new_width * aspect_ratio)
-
-        pdf.drawImage(produto.foto.path, 100, y=y - new_height - 2, width=150, height=150)
-        pdf.drawString(100, y - 50, f'Nome: {produto.nome}')
-        pdf.drawString(100, y - 60, f'Categoria: {produto.tipo}')
-
-        y -= 70  # Ajuste a posição vertical para a próxima entrada de dados
-
-    pdf.save()
-
-    return response
-
-
-
-@login_required(login_url='../login/')
-def some_view(request):
     queryset = Produtos.objects.filter(user=request.user, active=True)
     produto_filter = ProdutoFilter(request.GET, queryset=queryset)
     # Create a file-like buffer to receive PDF data.
@@ -222,15 +188,3 @@ def some_view(request):
     pdf.save()
     return response
 
-
-''' #caminho
-        print('oiiiiiiii', produto.foto)
-        #diretamente a imagem
-        print('olllllllllllha', UploadedFile(produto.foto))
-        #pdf.drawImage('media/error.jpg', 120, y - 40, width=50, height=50)
-        f = UploadedFile(produto.foto)
-        print('olllllllllllha', f)
-        #PIL da imagem
-        #print('aquiiiiiiiiiiii', Image.open(f, "r"))
-        #im = Image.open(f)
-        #print('immmmmm', im)'''

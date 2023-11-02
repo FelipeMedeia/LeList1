@@ -1,178 +1,43 @@
-<!DOCTYPE html>
-<html lang="pt-br">
-<head>
-    <meta charset="UTF-8">
-    <title>Página de Cadastro</title>
-    <style>
-        body{
-            font-family: Arial, helvetica, sans-serif;
-            background-color: #AD77C2;
-        }
-        .back{
-            background-color: #fff;
-            position: absolute;
-            top: 50%;
-            left: 60%;
-            transform: translate(-50%, -50%);
-            padding: 80px;
-            border-radius: 35px;
-            color: #000000;
-        }
-        input{
-            padding: 12px;
-            border: none;
-            outline: none;
-            font-size: 15px;
-        }
-        .confirma{
-            background-color: #900090;
-            border: none;
-            padding: 15px;
-            position: relative;
-            top:15px;
-            left: 220px;
+{% extends './static/html/base_externa.html' %}
+{% load static %}
 
-            border-radius: 20px;
-            font-size: 15px;
-        }
-        .limpa{
-            background-color: #ffa500;
-            border: none;
-            padding: 15px;
-            position: relative;
-            top: 15px;
-            right: 100px;
+{% block titulo%}
+     <title>Cadastro</title>
+{% endblock %}
 
-            border-radius: 20px;
-            font-size: 15px;
-        }
-        .volta{
-            background-color: #708090;
-            position: relative;
-            border: none;
-            padding: 15px;
-            top: 60px;
-            width: 30%;
-            border-radius: 20px;
-            color: #000;
-            text-decoration: none;
+{% block content %}
+         <h1>Cadastre-se</h1>
+                <form method="POST" action="{% url 'cadastro' %}">{% csrf_token %}
+                <div class="form-group" >
+                    <input class="form-control" style="border-color: #AD77C2; border-radius: 40px;" type="text" id="nome" placeholder="Digite seu nome" name="nome" required>
+                </div>
+                <div class="form-group">
+                    <input class="form-control" style="border-color: #AD77C2; border-radius: 40px;" type="email" id="email" placeholder="Ex.: aa@.com" name="email" required>
+                </div>
+                <div class="form-group">
+                    <input class="form-control" style="border-color: #AD77C2; border-radius: 40px;" type="password" id="password" placeholder="Digite sua senha" name="senha" required>
+                </div>
+                <div class="text-right">
+                    <button class="btn btn-light" style="background-color: #AD77C2">Cadastrar</button>
+                </div>
+                <div class="text-left">
+                    <button class="btn btn-warning" type="reset">Limpar</button>
+                </div>
 
-        }
-        .volta:hover{
-            background-color: #708090;
-            cursor: pointer;
-            color: #fff;
-            box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
-        }
-        .confirma:hover{
-            background-color: #2D0651;
-            cursor: pointer;
-            color: white;
-            box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
-        }
-        .limpa:hover{
-            background-color: #ffa500;
-            cursor: pointer;
-            color: white;
-            box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
-        }
+                </form>
 
-        .alert{
-            position: absolute;
-            color: red;
-            top: 80%;
-            left: 49%;
-        }
-        .modal {
-            display: none;
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background-color: rgba(0, 0, 0, 0.7);
-            align-items: center;
-            justify-content: center;
-        }
-
-        .modal-content {
-            background-color: #2D0651;
-            color: #fff;
-            width: 300px; /* Largura */
-            height: 200px; /* Altura */
-            padding: 10px;
-            border-radius: 10px;
-            text-align: center;
-            position: relative;
-            top: 50%; /* Centraliza verticalmente */
-            left: 50%; /* Centraliza horizontalmente */
-            transform: translate(-50%, -50%);
-        }
-        h1{
-            color: #2D0651;
-        }
-        .barra{
-        width: 300px;
-        height: 35px;
-        flex-shrink: 0;
-        border-radius: 25px;
-
-        border-radius: 25px;
-        border: 1px solid purple;
-        background: #D9D9D9;
-        box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
-        background: #fff;
-        position: relative;
-        top:15px;
-        justify-content: center;
-        padding: 5px;
-        cursor: pointer;
-
-        }
-        .L{
-        position: relative;
-        top: 130px;
-        left: 5px;
-
-        }
-
-    </style>
-</head>
-<body>
-    <div class="L">
-            <img src="/media/logo.png" alt="imagem" width="500px" height="500px">
-    </div>
-    <div class="back">
-        <h1>Cadastre-se</h1>
-        <form method="POST" action="{% url 'cadastro' %}">{% csrf_token %}
-        <input class="barra" type="text" placeholder="Digite seu nome" name="nome" required>
-         <br>
-         <br>
-        <input class="barra" type="email" placeholder="Exp.: aa@.com" name="email" required>
-         <br>
-         <br>
-         <input class="barra" type="password" placeholder="Digite sua senha" name="senha" required>
-         <br>
-         <br>
-         <button class="confirma">Cadastrar</button>
-         <button class="limpa" type="reset">Limpar</button>
-            <br>
-            <br>
-            <a class="volta" href="{% url 'index'%}">voltar </a>
-        </form>
-    </div>
-    {% for message in messages%}
-            <div class="alert">
-                <strong>Error!</strong>{{message}}
-            </div>
-    {% endfor%}
+                {% for message in messages%}
+                    <div class="alert alert-danger" role="alert">
+                        <strong>Error!</strong>{{message}}
+                    </div>
+                {% endfor%}
+{% endblock %}
     <div id="myModal" class="modal">
         <div class="modal-content">
             <p id="successMessage">Cadastro realizado com sucesso</p>
             <button id="closeModal">OK</button>
         </div>
     </div>
-
     <script>
         // Função para mostrar a janela modal quando a variável cadastro_sucesso for True
         function showModal() {
@@ -209,5 +74,3 @@
             });
         }
     </script>
-</body>
-</html>

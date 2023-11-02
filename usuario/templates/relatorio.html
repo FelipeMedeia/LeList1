@@ -1,102 +1,10 @@
-<head>
-       <style>
-           body {
-               font-family: Arial, helvetica, sans-serif;
-               background-color:#caf4ff;
-               margin: 16px;
-               padding: 33px;
-           }
+{% extends './static/html/base_interna.html' %}
 
-           #menu {
-               background-color: #059FEC;
-               position: fixed;
-               top: 0;
-               left: 0;
-               width: 100%;
-           }
-
-           #menu ul {
-               list-style-type: none;
-               margin: 0;
-               padding: 0;
-               overflow: hidden;
-               display: flex;
-               justify-content: left;
-           }
-
-           #menu li {
-               position: relative;
-               width: 30%;
-           }
-
-           #menu li a {
-               display: block;
-               color: black;
-               font-style: normal;
-               font-size: 16px;
-               text-align: center;
-               text-decoration: none;
-               padding: 16px;
-               border: 1px solid black;
-           }
-           #menu li a:hover {
-               background-color: white;
-           }
-
-           .gallery-container{
-                display: flex;
-                flex-wrap: wrap;
-                justify-content: space-evenly;
-                gap: 10vw;
-                padding: 0 5vw;
-                margin-block-end: 150px;
-           }
-           .gallery-items{
-                width: 340px;
-                height: 340px;
-
-           }
-           .gallery-items img{
-                margin-top: 20px;
-                width: 100%;
-                height: 100%;
-           }
-           .titulo{
-               color: black;
-               font-style: title;
-               font-size: 32px;
-               text-align: center;
-               text-decoration: none;
-               padding: 16px;
-               border: 1px solid black;
-           }
-           .container{
-                text-decoration:none;
-                display: block;
-                position: center;
-                font-family: arial;
-                font-style: normal;
-                color: #0000000;
-                font-weight: 500;
-                font-size: 23px;
-                margin-left:80px;
-           }
-       </style>
-</head>
-   <body>
-       <div id="menu">
-           <ul>
-               <li>
-                   <a href="{% url 'home'%}">Home</a>
-               </li>
-           </ul>
-       </div>
+{% block content %}
        <div>
            <h2 class="titulo"> Relatório</h2>
        </div>
-
        <div>
-
        <ul>
            <form method="GET" action="{% url 'relatorio' %}">
                <a href="{% url 'relatorio' %}" target="_blank" class="btn btn-primary">Gerar PDF</a>
@@ -105,9 +13,6 @@
            {% for p in produto_filter %}
                 <li>Nome: {{ p.nome }} - Categoria: {{ p.tipo }} - <img src="{{p.foto}}"></li>
            {% endfor %}
-
        </ul>
-
        </div>
-
-   </body>
+{% endblock %}
