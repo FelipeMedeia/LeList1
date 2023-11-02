@@ -1,11 +1,14 @@
+from PIL import Image
 from django.contrib import messages
-from django.http.response import HttpResponse, HttpResponseRedirect
+from django.core.files.base import ContentFile
+from django.core.files.storage import default_storage
+from django.http.response import HttpResponse
 from django.shortcuts import render, redirect
 from django.core.files.base import ContentFile
 from django.contrib.auth.models import User
 from django.core.files.storage import default_storage
 from django.contrib.auth import authenticate
-from django.contrib.auth import login as login_imp, logout
+from django.contrib.auth import login as login_imp
 from .models import Produtos
 from django.contrib.auth.decorators import login_required
 from usuario.filters import ProdutoFilter
@@ -76,23 +79,6 @@ def home(request):
 
 
 @login_required(login_url='../login/')
-def home_filter(request):
-    categoria_filter = ProdutoFilter(request.GET, queryset=Produtos.objects.filter(user=request.user, active=True))
-
-    context = {
-        'form': categoria_filter.form,
-        'produto': categoria_filter.qs
-    }
-    return render(request, 'filter.html', context)
-
-
-@login_required(login_url='../login/')
-def listar_produtos(request):
-    produto = Produtos.objects.filter(user=request.user, active=True)
-    return render(request, 'relatorio.html', {'produto': produto})
-
-
-@login_required(login_url='../login/')
 def produto(request):
     if request.method == "GET":
         produto_id = request.GET.get('id')
@@ -131,10 +117,12 @@ def produto(request):
         else:
             produto = Produtos.objects.filter(nome=nome, user=user, data_validade=data_validade).first()
             if produto:
-                return HttpResponse('Já existe um produto com esse nome')
-            produto = Produtos.objects.create(nome=nome, tipo=tipo, quantidade=quantidade,
-                                              data_validade=data_validade, foto=foto, user=user)
-            produto.save()
+                messages.error(request, 'Já existe um produto com esses dados')
+
+            else:
+                produto = Produtos.objects.create(nome=nome, tipo=tipo, quantidade=quantidade,
+                                                  data_validade=data_validade, foto=foto, user=user)
+                produto.save()
 
         return render(request, 'produto.html')
 
@@ -146,14 +134,14 @@ def produto_detalhe(request, id):
 
 
 @login_required(login_url='../login/')
-def excluir_produto(request, id): 
+def excluir_produto(request, id):
     user = request.user
     if id:
-            produto = Produtos.objects.get(id=id)
-            if user == produto.user:
-                # Verifique se uma nova imagem foi enviada
-                 default_storage.delete(produto.foto.name)
-            produto.save()
+        produto = Produtos.objects.get(id=id)
+        if user == produto.user:
+            # Verifique se uma nova imagem foi enviada
+            default_storage.delete(produto.foto.name)
+        produto.save()
     produto = Produtos.objects.get(id=id)
     produto.delete()
     return redirect('/home/')
@@ -167,35 +155,38 @@ def index(request):
 def gerar_pdf(request):
     queryset = Produtos.objects.filter(user=request.user, active=True)
     produto_filter = ProdutoFilter(request.GET, queryset=queryset)
-
+    # Create a file-like buffer to receive PDF data.
     response = HttpResponse(content_type='application/pdf')
-    response['Content-Disposition'] = 'attachment; filename="lista_de_produtos.pdf"'
+    response['Content-Disposition'] = 'filename="lista_de_produtos.pdf"'
 
-    p = canvas.Canvas(response)
+    # Create the PDF object, using the buffer as its "file."
+    pdf = canvas.Canvas(response)
 
-    # Configure a posição inicial para escrever os dados no PDF
     y = 750
 
-    p.setFont("Helvetica-Bold", 16)
-    p.drawString(100, y, "Lista de Produtos")
-    p.setFont("Helvetica", 12)
-    y -= 30  # Ajuste a posição vertical para a próxima entrada de dados
+    pdf.setFont("Helvetica-Bold", 16)
+    pdf.drawString(250, y, "Lista de Produtos")
+    pdf.setFont("Helvetica", 12)
+    y -= 30
 
+    # Draw things on the PDF. Here's where the PDF generation happens.
+    # See the ReportLab documentation for the full list of functionality.
     for produto in produto_filter.qs:
-        imagem = Image.open(produto.foto.path)  
+        imagem = Image.open(produto.foto.path)
         width, height = imagem.size
         aspect_ratio = height / width
-        new_width = 400  # Defina a largura desejada para a imagem no PDF
+        new_width = 100
         new_height = int(new_width * aspect_ratio)
-        
-        p.drawString(100, y, f'Nome: {produto.nome}')
-        p.drawString(100, y - 15, f'Categoria: {produto.tipo}')
 
-        # Desenhe a imagem abaixo das informações do produto
-        p.drawImage(produto.foto.path, x=100, y=y - new_height - 20, width=new_width, height=new_height)
+        pdf.drawImage(produto.foto.path, 100, y - 50, width=new_width, height=new_height)
+        pdf.drawString(100, y - 60, f'Nome: {produto.nome}')
+        pdf.drawString(100, y - 70, f'Categoria: {produto.tipo}')
 
-        y -= new_height + 30  # Ajuste a posição vertical para a próxima entrada de dados
+        # Adicione mais campos do produto conforme necessário
+        y -= new_height + 60
+        if y < 50:
+            y += 720
+            pdf.showPage()
 
-    p.save()
-
+    pdf.save()
     return response

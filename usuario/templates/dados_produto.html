@@ -1,112 +1,30 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Dados produto</title>
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
-    <style>
-        .back{
 
-            width: 160px;
-            font-family: 'Inter';
-            font-style: normal;
-            font-weight: 400;
-            font-size: 50px;
-            color: #6BDCFF;
-        }
-        .altera {
-          background-color: #FFFF00;
-          border: none;
-          color: #000;
-          padding: 15px 32px;
-          text-align: center;
-          text-decoration: none;
-          display: inline-block;
-          font-size: 16px;
+{% extends './static/html/base_interna.html' %}
+{% load static %}
 
-        }
-        .altera:hover{
-            background-color: #ffa500;
-        }
-        .exclui {
-          background-color: red;
-          border: none;
-          color: white;
-          padding: 15px 32px;
-          text-align: center;
-          text-decoration: none;
-          display: inline-block;
-          font-size: 16px;
-        }
-        .exclui:hover{
-            background-color: #2D0651;
-        }
-           .pad{
-                background-color: #AD77C2;
-                display: flex;
-                flex-wrap: wrap;
-                justify-content: space-around;
-                margin-block-end: 1px;
-                text-decoration: none;
-                text-align: center;
+{% block titulo%}
+    <title>Dados do Produto</title>
+{% endblock %}
 
-           }
-           button{
-                margin: 5px;
-           }
-           a{
-                text-decoration: none;
-           }
-    </style>
-
-</head>
-<body>
-    <nav class="navbar navbar-expand-lg navbar-dark" style="background-color: #2D0651;">
-        <a class="navbar-brand" href="{% url 'home'%}">
-            <img src="/media/logo.png" alt="Imagem" width="40" height="40">
-        </a>
-        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
-        </button>
-        <div class="collapse navbar-collapse" id="navbarNav">
-            <ul class="navbar-nav">
-                <li class="nav-item mr-sm-5">
-                    <a class="nav-link" href="{% url 'produto'%}" style="color: white;">Produtos</a>
-                </li>
-                <li class="nav-item mr-sm-5">
-                    <a class="nav-link" href="{% url 'relatorio'%}" style="color: white;">Gerar PDF</a>
-                </li>
-                <li class="nav-item mr-sm-5">
-                    <a class="nav-link" href="{% url 'duvida' %}" style="color: white;">Dúvida</a>
-                </li>
-                <li class="nav-item mr-sm-5">
-                    <a class="nav-link" href="{% url 'logout' %}" style="color: white;">Sair</a>
-                </li>
-            </ul>
+{% block content %}
+    <h1>Detalhes do produto</h1>
+    <div class="container">
+        <div style="justify-content: center; ">
+            <img src="{{produto.foto.url}}" width="300px;" height="300px;" style="margin-top: 10px;">
         </div>
-    </nav>
-    <div class="container mt-5">
-        <h1>Detalhes do produto</h1>
-        <div class="row">
-            <div class="col-md-4 text-center">
-                <img src="{{produto.foto.url}}" width="300px" height="300px" style="margin-top: 10px; ">
-            </div>
-            <div class="col-md-8">
-                <p><b>Nome: </b>{{produto.nome}}</p>
-                <p><b>Categoria: </b>{{produto.tipo}}</p>
-                <p><b>Data de Validade: </b>{{produto.data_validade}}</p>
-                <p><b>Quantidade: </b{{produto.quantidade}}</p>
-                <a href="/produto/?id={{ produto.id }}">
-                    <button type="button" class="btn btn-primary">Alterar</button>
-                </a>
-                <a href="../excluir/{{produto.id}}/">
-                    <button type="button" class="btn btn-danger">Excluir</button>
-                </a>
-            </div>
+
+        <div class="container">
+            <p><b>Nome: </b>{{produto.nome}}</p>
+            <p><b>Categoria: </b>{{produto.tipo}}</p>
+            <p><b>Data de Validade: </b>{{produto.data_validade}}</p>
+            <p><b>Quantidade: </b>{{produto.quantidade}}</p>
+            <a href="/produto/?id={{ produto.id }}">
+                <button type="button" class="btn btn-warning">Alterar</button>
+            </a>
+            <a href="../excluir/{{produto.id}}/">
+                <button type="button" class="btn btn-danger">Excluir</button>
+            </a>
         </div>
     </div>
-    
+{% endblock %}
 
-
-</body>
-</html>
