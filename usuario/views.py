@@ -4,14 +4,17 @@ from django.core.files.base import ContentFile
 from django.core.files.storage import default_storage
 from django.http.response import HttpResponse
 from django.shortcuts import render, redirect
+from django.core.files.base import ContentFile
 from django.contrib.auth.models import User
+from django.core.files.storage import default_storage
 from django.contrib.auth import authenticate
 from django.contrib.auth import login as login_imp
 from .models import Produtos
 from django.contrib.auth.decorators import login_required
 from usuario.filters import ProdutoFilter
 from reportlab.pdfgen import canvas
-
+from PIL import Image
+import os
 
 # Create your views here.
 
@@ -92,6 +95,7 @@ def produto(request):
         foto = request.FILES.get('file')
         produto_id = request.POST.get('produto-id')
         user = request.user
+
         if produto_id:
             produto = Produtos.objects.get(id=produto_id)
             if user == produto.user:
@@ -110,7 +114,6 @@ def produto(request):
                 produto.quantidade = quantidade
                 produto.data_validade = data_validade
                 produto.save()
-
         else:
             produto = Produtos.objects.filter(nome=nome, user=user, data_validade=data_validade).first()
             if produto:
@@ -187,4 +190,3 @@ def gerar_pdf(request):
 
     pdf.save()
     return response
-
