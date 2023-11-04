@@ -17,7 +17,7 @@
                     <input class="barra" style="border-color: #AD77C2; border-radius: 40px;" type="text" placeholder="nome do produto" name="nome" value="{{produto.nome}}" required>
                     <br>
                     <br>
-                    <select class="barra" style="border-color: #AD77C2; border-radius: 40px;" name="tipo" required>
+                    <select class="barra" style="border-color: #AD77C2; border-radius: 40px;" name="categoria" required>
                          <option value="" disabled selected >Selecione uma categoria</option>
                          <option value="Cosmetico" >Cosmetico</option>
                          <option value="Perfume" >Perfume</option>
@@ -26,13 +26,16 @@
 
                      <br>
                      <br>
-                     <input class="barra" type="number" style="border-color: #AD77C2; border-radius: 40px;" placeholder="quantidade" name="quantidade" value="{{produto.quantidade}}" required>
+                     <input class="forms" type="text" style="border-color: #AD77C2; border-radius: 40px;" placeholder="Valor Ex.: 10.50" name="preco" value="{{produto.preco}}" required>
                      <br>
                      <br>
-                     <input class="barra" type="date" style="border-color: #AD77C2; border-radius: 40px;" name="data_validade" value="{{produto.data_validade}}" required>
+                     <input class="barra" type="text" style="border-color: #AD77C2; border-radius: 40px;" placeholder="Tamanho em ml ou g" name="tamanho" value="{{produto.tamanho}}" required>
                      <br>
                      <br>
                      <input class="photo" type="file" style="border-color: #AD77C2; border-radius: 40px; background-color: #fff;" placeholder="imagem do produto" name="file" value="{{produto.file}}" required>
+                     <br>
+                     <br>
+                     <input class="barra" type="text" style="border-color: #AD77C2; with: 40px; height: 100px" placeholder="Descreva o produto" name="descricao" value="{{produto.descricao}}" required>
                      <br>
                      <br>
                      {% if produto %}

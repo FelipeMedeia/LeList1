@@ -86,10 +86,11 @@ def produto(request):
         return render(request, 'produto.html')
     else:
         nome = request.POST.get('nome')
-        tipo = request.POST.get('tipo')
-        quantidade = request.POST.get('quantidade')
-        data_validade = request.POST.get('data_validade')
+        categoria = request.POST.get('categoria')
+        preco = request.POST.get('preco')
+        tamanho = request.POST.get('tamanho')
         foto = request.FILES.get('file')
+        descricao = request.POST.get('descricao')
         produto_id = request.POST.get('produto-id')
         user = request.user
         if produto_id:
@@ -106,19 +107,23 @@ def produto(request):
                     # Salve a nova imagem no local de upload
                     produto.foto.save(foto.name, ContentFile(foto.read()))
                 produto.nome = nome
-                produto.tipo = tipo
-                produto.quantidade = quantidade
-                produto.data_validade = data_validade
+                produto.categoria = categoria
+                produto.preco = preco
+                produto.tamanho = tamanho
+                produto.descricao = descricao
                 produto.save()
 
+                return redirect('home')
+
         else:
-            produto = Produtos.objects.filter(nome=nome, user=user, data_validade=data_validade).first()
+            produto = Produtos.objects.filter(nome=nome, user=user, categoria=categoria).first()
             if produto:
                 messages.error(request, 'Já existe um produto com esses dados')
 
             else:
-                produto = Produtos.objects.create(nome=nome, tipo=tipo, quantidade=quantidade,
-                                                  data_validade=data_validade, foto=foto, user=user)
+                produto = Produtos.objects.create(nome=nome, categoria=categoria, preco=preco,
+                                                  tamanho=tamanho, foto=foto, descricao=descricao,
+                                                  user=user)
                 produto.save()
 
         return render(request, 'produto.html')
@@ -165,7 +170,6 @@ def gerar_pdf(request):
     pdf.drawString(250, y, "Lista de Produtos")
     pdf.setFont("Helvetica", 12)
     y -= 30
-
     # Draw things on the PDF. Here's where the PDF generation happens.
     # See the ReportLab documentation for the full list of functionality.
     for produto in produto_filter.qs:
@@ -175,9 +179,10 @@ def gerar_pdf(request):
         new_width = 100
         new_height = int(new_width * aspect_ratio)
 
-        pdf.drawImage(produto.foto.path, 100, y - 50, width=new_width, height=new_height)
-        pdf.drawString(100, y - 60, f'Nome: {produto.nome}')
-        pdf.drawString(100, y - 70, f'Categoria: {produto.tipo}')
+        pdf.drawImage(produto.foto.path, 100, y - 70, width=new_width, height=new_height)
+        pdf.drawString(100, y - 80, f'Preço: {produto.preco}')
+        pdf.drawString(100, y - 90, f'Nome: {produto.nome}')
+        pdf.drawString(100, y - 100, f'Categoria: {produto.categoria}')
 
         # Adicione mais campos do produto conforme necessário
         y -= new_height + 60
