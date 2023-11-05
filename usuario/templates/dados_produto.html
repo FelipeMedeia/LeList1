@@ -7,24 +7,24 @@
 {% endblock %}
 
 {% block content %}
-    <h1>Detalhes do produto</h1>
+    <h1 >Detalhes do produto</h1>
     <div class="container">
-        <div style="justify-content: center; ">
-            <img src="{{produto.foto.url}}" width="300px;" height="300px;" style="margin-top: 10px;">
-        </div>
-
-        <div class="container">
-            <p><b>Nome: </b>{{produto.nome}}</p>
-            <p><b>Categoria: </b>{{produto.tipo}}</p>
-            <p><b>Data de Validade: </b>{{produto.data_validade}}</p>
-            <p><b>Quantidade: </b>{{produto.quantidade}}</p>
-            <a href="/produto/?id={{ produto.id }}">
-                <button type="button" class="btn btn-warning">Alterar</button>
-            </a>
-            <a href="../excluir/{{produto.id}}/">
-                <button type="button" class="btn btn-danger">Excluir</button>
-            </a>
-        </div>
+            <div class="card m-3" style="width: 30rem; background-color: #E4E4E5">
+                <img class="card-img-top" src="{{produto.foto.url}}" alt="Card image cap">
+                <div class="card-body">
+                    <p class="text-center"> R$: {{produto.preco}}</p>
+                    <p class="text-center">Nome: {{produto.nome}}</p>
+                    <p class="text-center">Categoria: {{produto.categoria}}</p>
+                    <p class="text-center">Descrição: {{produto.descricao}}</p>
+                    <a href="/produto/?id={{ produto.id }}">
+                        <button type="button" class="btn btn-warning">Alterar</button>
+                    </a>
+                    <a href="../excluir/{{produto.id}}/">
+                        <button type="button" class="btn btn-danger">Excluir</button>
+                    </a>
+                </div>
+                </a>
+            </div>
     </div>
 {% endblock %}
 
