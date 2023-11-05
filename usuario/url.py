@@ -13,6 +13,6 @@ urlpatterns = [
     path('produto/', views.produto, name='produto'),
     path('relatorio/', views.gerar_pdf, name='relatorio'),
     path('detalhes/<int:id>/', views.produto_detalhe, name='produto_detalhe'),
-    path('detalhes/excluir/<int:id>/', views.excluir_produto, name='excluir'),
-    path('home/duvidas/', views.duvidas, name='duvida')
+    path('detalhes/excluir/<id>/', views.excluir_produto, name='excluir'),
+    path('duvidas/', views.duvidas, name='duvida'),
 ]
