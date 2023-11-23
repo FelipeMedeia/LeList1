@@ -1,5 +1,5 @@
-{% load static %}
 <!DOCTYPE html>
+{% load static %}
 <html lang="pt-br">
 <head>
     <meta charset="UTF-8">
@@ -14,7 +14,7 @@
 </head>
 <body  style="background-color: #fff">
         <nav class="navbar navbar-expand-lg navbar navbar-dark" style="background-color: #2D0651;">
-          <a class="nav-item mr-sm-5" href="{% url 'home' %}"><img src="../media/logo.png" width="70" height="70" alt=""></a>
+          <a class="nav-item mr-sm-5" href="{% url 'home' %}"><img src="{% static '../media/logo.png' %}" width="70" height="70" alt=""></a>
           <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#conteudoNavbarSuportado" aria-controls="conteudoNavbarSuportado" aria-expanded="false" aria-label="Alterna navegação">
             <span class="navbar-toggler-icon"></span>
           </button>
