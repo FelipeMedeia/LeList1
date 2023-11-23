@@ -27,7 +27,7 @@
 
                     <br>
                     <br>
-                    <input class="forms" type="text" style="border-color: #AD77C2; border-radius: 40px;" placeholder="Valor Ex.: 10.50" name="preco" pattern="\d+(\.\d{1,2})?" title="Informe um número válido no formato 10.50" required>
+                    <input class="forms" type="text" style="border-color: #AD77C2; border-radius: 40px;" placeholder="Valor Ex.: 1.000,00" name="preco" pattern="^\d{1,3}(\.\d{3})*(,\d{1,2})?$" title="Informe um valor válido no formato 1.000,00" required>
                     <br>
                     <br>
                     <input class="barra" type="text" style="border-color: #AD77C2; border-radius: 40px;" placeholder="Tamanho em ml ou g" name="tamanho" value="{{produto.tamanho}}" required>
