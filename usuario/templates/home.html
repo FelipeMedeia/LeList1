@@ -22,7 +22,7 @@
                         <a href="../detalhes/{{p.id}}">
                         <img class="card-img-top" src="{{p.foto.url}}" alt="Card image cap">
                         <div class="card-body">
-                            <p class="text-center"> R$: {{ p.preco|floatformat:"2"|replace:',','.'|replace('.',',') }}</p>
+                            <p class="text-center"> R$: {{ p.preco}}</p>
                             <p class="text-center">Nome: {{p.nome}}</p>
                         </div>
                         </a>
